@@ -5,16 +5,10 @@ class GalleryThemeData {
   static const _lightFillColor = Colors.black;
   static const _darkFillColor = Colors.white;
 
-  static ThemeData lightThemeData = themeData(
-    _lightColorScheme,
-    Brightness.light,
-  );
-  static ThemeData darkThemeData = themeData(
-    _darkColorScheme,
-    Brightness.dark,
-  );
+  static ThemeData lightThemeData = themeData(_lightColorScheme);
+  static ThemeData darkThemeData = themeData(_darkColorScheme);
 
-  static ThemeData themeData(ColorScheme colorScheme, Brightness brightness) {
+  static ThemeData themeData(ColorScheme colorScheme) {
     return ThemeData(
       colorScheme: colorScheme,
       textTheme: _textTheme,
@@ -23,7 +17,7 @@ class GalleryThemeData {
         color: colorScheme.background,
         elevation: 0,
         iconTheme: IconThemeData(color: colorScheme.primary),
-        brightness: brightness,
+        brightness: colorScheme.brightness,
       ),
       canvasColor: colorScheme.background,
     );
