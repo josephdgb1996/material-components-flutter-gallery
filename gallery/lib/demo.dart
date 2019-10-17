@@ -28,9 +28,9 @@ class DemoPage extends StatelessWidget {
         margin: const EdgeInsets.only(left: 16.0, right: 16.0, bottom: 16.0),
         decoration: BoxDecoration(
           color: Colors.black,
-          borderRadius: BorderRadius.only(
-            topLeft: Radius.circular(10.0),
-            topRight: Radius.circular(10.0),
+          borderRadius: BorderRadius.vertical(
+            top: Radius.circular(10.0),
+            bottom: Radius.circular(2.0),
           ),
         ),
         child: Center(
