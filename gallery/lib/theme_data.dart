@@ -5,23 +5,29 @@ class GalleryThemeData {
   static const _lightFillColor = Colors.black;
   static const _darkFillColor = Colors.white;
 
-  static ThemeData lightThemeData = ThemeData(
-    colorScheme: _lightColorScheme,
-    textTheme: _textTheme,
-    appBarTheme: AppBarTheme(
-      textTheme: _textTheme,
-      color: _lightColorScheme.background,
-    ),
+  static ThemeData lightThemeData = themeData(
+    _lightColorScheme,
+    Brightness.light,
+  );
+  static ThemeData darkThemeData = themeData(
+    _darkColorScheme,
+    Brightness.dark,
   );
 
-  static ThemeData darkThemeData = ThemeData(
-    colorScheme: _darkColorScheme,
-    textTheme: _textTheme,
-    appBarTheme: AppBarTheme(
+  static ThemeData themeData(ColorScheme colorScheme, Brightness brightness) {
+    return ThemeData(
+      colorScheme: colorScheme,
       textTheme: _textTheme,
-      color: _darkColorScheme.background,
-    ),
-  );
+      appBarTheme: AppBarTheme(
+        textTheme: _textTheme,
+        color: colorScheme.background,
+        elevation: 0,
+        iconTheme: IconThemeData(color: colorScheme.primary),
+        brightness: brightness,
+      ),
+      canvasColor: colorScheme.background,
+    );
+  }
 
   static ColorScheme _lightColorScheme = ColorScheme(
     primary: Color(0xFFB93C5D),
