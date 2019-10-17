@@ -25,7 +25,7 @@ class DemoPage extends StatelessWidget {
         ],
       ),
       body: Container(
-        margin: const EdgeInsets.symmetric(horizontal: 16.0),
+        margin: const EdgeInsets.only(left: 16.0, right: 16.0, bottom: 16.0),
         decoration: BoxDecoration(
           color: Colors.black,
           borderRadius: BorderRadius.only(
