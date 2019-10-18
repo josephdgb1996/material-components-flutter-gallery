@@ -20,17 +20,19 @@ class GalleryThemeData {
         brightness: colorScheme.brightness,
       ),
       canvasColor: colorScheme.background,
+      scaffoldBackgroundColor: colorScheme.background,
     );
   }
 
+  /// TODO(
   static ColorScheme _lightColorScheme = ColorScheme(
-    primary: Color(0xFFB93C5D),
-    primaryVariant: Color(0xFF117378),
-    secondary: Color(0xFFDCE0E0),
-    secondaryVariant: Color(0xFFFAFBFB),
-    background: Color(0xFFE6EBEB),
+    primary: Color(0xB93C5D),
+    primaryVariant: Color(0x117378),
+    secondary: Color(0xDCE0E0),
+    secondaryVariant: Color(0xFAFBFB),
+    background: Color(0xE6EBEB),
     surface: Color(0xFFEFF3F3),
-    onBackground: _lightFillColor,
+    onBackground: Colors.white.withOpacity(0.8),
     error: _lightFillColor,
     onError: _lightFillColor,
     onPrimary: _lightFillColor,
@@ -46,7 +48,7 @@ class GalleryThemeData {
     secondaryVariant: Color(0xFF451B6F),
     background: Color(0xFF241E30),
     surface: Color(0xFF4D1F7C),
-    onBackground: _darkFillColor,
+    onBackground: Colors.white.withOpacity(0.05),
     error: _darkFillColor,
     onError: _darkFillColor,
     onPrimary: _darkFillColor,
