@@ -24,19 +24,23 @@ class DemoPage extends StatelessWidget {
           ),
         ],
       ),
-      body: Container(
-        margin: const EdgeInsets.only(left: 16.0, right: 16.0, bottom: 16.0),
-        decoration: BoxDecoration(
-          color: Colors.black,
-          borderRadius: BorderRadius.vertical(
-            top: Radius.circular(10.0),
-            bottom: Radius.circular(2.0),
+      body: SafeArea(
+        child: Container(
+          margin: const EdgeInsets.only(left: 16.0, right: 16.0, bottom: 16.0),
+          decoration: BoxDecoration(
+            color: Colors.black,
+            borderRadius: BorderRadius.vertical(
+              top: Radius.circular(10.0),
+              bottom: Radius.circular(2.0),
+            ),
           ),
-        ),
-        child: Center(
-          child: Text(
-            'Demo Placeholder',
-            style: Theme.of(context).textTheme.body1.apply(color: Colors.white),
+          child: Center(
+            child: Text(
+              'Demo Placeholder',
+              style: Theme.of(context).textTheme.body1.apply(
+                    color: Colors.white,
+                  ),
+            ),
           ),
         ),
       ),

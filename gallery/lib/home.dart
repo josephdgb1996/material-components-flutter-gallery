@@ -11,36 +11,50 @@ class HomePage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         actions: [
-          IconButton(
+          Container(
             color: Theme.of(context).colorScheme.secondaryVariant,
-            icon: Icon(Icons.settings),
-            onPressed: () {
-              Navigator.of(context).push<void>(
-                MaterialPageRoute(
-                  fullscreenDialog: true,
-                  builder: (context) => SettingsPage(),
-                ),
-              );
-            },
+            child: IconButton(
+              icon: Icon(
+                Icons.settings,
+              ),
+              onPressed: () {
+                Navigator.of(context).push<void>(
+                  MaterialPageRoute(
+                    fullscreenDialog: true,
+                    builder: (context) => SettingsPage(),
+                  ),
+                );
+              },
+            ),
           ),
         ],
       ),
-      body:
-//      Padding(
-//        padding: EdgeInsets.fromLTRB(32, 0, 32, 0),
-          ListView(
+      body: ListView(
         children: [
           header(
               context, Theme.of(context).colorScheme.primaryVariant, 'Gallery'),
           Container(
-            height: 192.0,
-            child: ListView(
-              scrollDirection: Axis.horizontal,
-              children: const [
-                CarouselCard(title: 'SHRINE'),
-                CarouselCard(title: 'RALLY'),
-                CarouselCard(title: 'CRANE'),
-              ],
+            margin: EdgeInsets.fromLTRB(16, 0, 0, 0),
+            child: Container(
+              height: 192,
+              width: 296,
+              child: ListView(
+                scrollDirection: Axis.horizontal,
+                children: const [
+                  CarouselCard(
+                    title: 'SHRINE',
+                    subtitle: 'Basic shopping app',
+                  ),
+                  CarouselCard(
+                    title: 'RALLY',
+                    subtitle: 'Basic shopping app',
+                  ),
+                  CarouselCard(
+                    title: 'CRANE',
+                    subtitle: 'Basic shopping app',
+                  ),
+                ],
+              ),
             ),
           ),
           header(context, Theme.of(context).colorScheme.primary, 'Categories'),
@@ -55,7 +69,6 @@ class HomePage extends StatelessWidget {
               imageString: 'assets/icons/reference/Icon-reference@1x.png'),
         ],
       ),
-//      ),
     );
   }
 
@@ -71,45 +84,61 @@ class HomePage extends StatelessWidget {
 }
 
 class CarouselCard extends StatelessWidget {
-  const CarouselCard({Key key, this.title}) : super(key: key);
+  const CarouselCard({Key key, this.title, this.subtitle}) : super(key: key);
 
   final String title;
+  final String subtitle;
 
   @override
   Widget build(BuildContext context) {
-    return
-//      Padding(
-//      padding: EdgeInsets.fromLTRB(0, 0, 0, 0),
-//      child:
+    return Row(
+      children: [
         GestureDetector(
-      onTap: () {
-        Navigator.of(context).push<void>(
-          MaterialPageRoute(
-            builder: (context) => StudyPlaceholderPage(),
-          ),
-        );
-      },
-      child: Row(
-        children: [
-          Container(
-            width: 296,
-            decoration: BoxDecoration(
-              image: DecorationImage(
-                image: AssetImage('assets/icons/shrine_card/Shrine Card.png'),
-                fit: BoxFit.cover,
+            onTap: () {
+              Navigator.of(context).push<void>(
+                MaterialPageRoute(
+                  builder: (context) => StudyPlaceholderPage(),
+                ),
+              );
+            },
+            child: Container(
+              width: MediaQuery.of(context).size.width * .9,
+              child: Stack(
+                fit: StackFit.expand,
+                children: [
+                  Container(
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(10),
+                      color: Theme.of(context).colorScheme.background,
+                      image: DecorationImage(
+                        image: AssetImage(
+                            'assets/icons/shrine_card/Shrine Card@1x.png'),
+                        fit: BoxFit.fill,
+                      ),
+                    ),
+                  ),
+                  Positioned(
+                    bottom: 16,
+                    left: 16,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          title,
+                          style: Theme.of(context).textTheme.headline,
+                          textAlign: TextAlign.left,
+                        ),
+                        Text(
+                          subtitle,
+                          style: Theme.of(context).textTheme.subhead,
+                        )
+                      ],
+                    ),
+                  )
+                ],
               ),
-              borderRadius: BorderRadius.circular(10),
-            ),
-            child: Center(
-              child: Text(
-                '',
-                style: Theme.of(context).textTheme.caption,
-              ),
-            ),
-          ),
-        ],
-      ),
-//      ),
+            )),
+      ],
     );
   }
 }
@@ -124,64 +153,38 @@ class CategoryListItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-        padding: EdgeInsets.fromLTRB(32, 8, 32, 8),
-        child: FlatButton(
-          shape:
-              RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
-          color: Theme.of(context).colorScheme.onBackground,
-          onPressed: () {
-            Navigator.push<dynamic>(
-              context,
-              MaterialPageRoute<dynamic>(builder: (context) => DemoPage()),
-            );
-          },
-          child: Row(
-            children: [
-              Image.asset(
+      padding: EdgeInsets.fromLTRB(32, 8, 32, 8),
+      child: FlatButton(
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+        color: Theme.of(context).colorScheme.onBackground,
+        onPressed: () {
+          Navigator.push<dynamic>(
+            context,
+            MaterialPageRoute<dynamic>(builder: (context) => DemoPage()),
+          );
+        },
+        child: Row(
+          children: [
+            Padding(
+              padding: EdgeInsets.fromLTRB(0, 8, 8, 8),
+              child: Image.asset(
                 (imageString),
                 width: 64,
                 height: 64,
               ),
-              Flexible(
+            ),
+            Flexible(
+              child: Padding(
+                padding: EdgeInsets.fromLTRB(8, 0, 0, 0),
                 child: Text(title.toUpperCase(),
-                    style: Theme.of(context).textTheme.display1.apply(
+                    style: Theme.of(context).textTheme.headline.apply(
                           color: Colors.white,
                         )),
               ),
-            ],
-          ),
-        )
-//        tooltip: 'Material Icon',
-//        iconSize: 64,
-
-//            onPressed: Navigator.of(context).push(
-//              MaterialPageRoute(
-//                builder: (context) => DemoPage(),
-//              ),
-//            );
-//      ),
-//      child: GestureDetector(
-//        onTap: () {
-//          Navigator.of(context).push(
-//            MaterialPageRoute(
-//              builder: (context) => DemoPage(),
-//            ),
-//          );
-//        },
-//            Container(
-//          height: 70.0,
-//          decoration: BoxDecoration(
-//            color: Theme.of(context).colorScheme.onBackground,
-//            borderRadius: BorderRadius.circular(4.0),
-//          ),
-//          child: Center(
-//            child: Text(
-//              title,
-//              style: Theme.of(context).textTheme.headline,
-//            ),
-//          ),
-//        ),
-//      ),
-        );
+            ),
+          ],
+        ),
+      ),
+    );
   }
 }

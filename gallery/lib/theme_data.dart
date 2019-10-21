@@ -24,7 +24,6 @@ class GalleryThemeData {
     );
   }
 
-  /// TODO(
   static ColorScheme _lightColorScheme = ColorScheme(
     primary: Color(0xB93C5D),
     primaryVariant: Color(0x117378),
