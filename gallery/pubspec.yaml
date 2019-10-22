@@ -18,11 +18,10 @@ dev_dependencies:
 
 flutter:
   assets:
-    - assets/icons/1.0x/
-    - assets/icons/1.5x/
-    - assets/icons/2.0x/
-    - assets/icons/3.0x/
-    - assets/icons/4.0x/
+    - assets/icons/cupertino/
+    - assets/icons/material/
+    - assets/icons/reference/
+    - assets/icons/shrine_card/
   uses-material-design: true
   fonts:
     - family: Montserrat

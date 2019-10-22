@@ -45,6 +45,7 @@ class HomePage extends StatelessWidget {
                   CarouselCard(
                     title: 'SHRINE',
                     subtitle: 'Basic shopping app',
+                    leftPadding: 24,
                   ),
                   CarouselCard(
                     title: 'RALLY',
@@ -61,15 +62,15 @@ class HomePage extends StatelessWidget {
           header(context, Theme.of(context).colorScheme.primary, 'Categories'),
           const CategoryListItem(
             title: 'Material',
-            imageString: 'assets/icons/1.0x/material.png',
+            imageString: 'assets/icons/material/material.png',
           ),
           const CategoryListItem(
             title: 'Cupertino',
-            imageString: 'assets/icons/1.0x/cupertino.png',
+            imageString: 'assets/icons/cupertino/cupertino.png',
           ),
           const CategoryListItem(
             title: 'Reference styles & media',
-            imageString: 'assets/icons/1.0x/reference.png',
+            imageString: 'assets/icons/reference/reference.png',
           ),
         ],
       ),
@@ -88,15 +89,17 @@ class HomePage extends StatelessWidget {
 }
 
 class CarouselCard extends StatelessWidget {
-  const CarouselCard({Key key, this.title, this.subtitle}) : super(key: key);
+  const CarouselCard({Key key, this.title, this.subtitle, this.leftPadding = 0})
+      : super(key: key);
 
   final String title;
   final String subtitle;
+  final double leftPadding;
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: EdgeInsetsDirectional.fromSTEB(8, 0, 8, 0),
+    return Container(
+      padding: EdgeInsetsDirectional.fromSTEB(8 + leftPadding, 0, 8, 0),
       child: InkWell(
         onTap: () {
           Navigator.of(context).push<void>(
@@ -106,12 +109,13 @@ class CarouselCard extends StatelessWidget {
           );
         },
         child: Container(
-          width: MediaQuery.of(context).size.width * .9,
+//          width: 296,
+          width: MediaQuery.of(context).size.width * .85,
           child: Stack(
             fit: StackFit.expand,
             children: [
               Image.asset(
-                'assets/icons/1.0x/shrine_card.png',
+                'assets/icons/shrine_card/shrine_card.png',
                 fit: BoxFit.fill,
               ),
               Positioned(
