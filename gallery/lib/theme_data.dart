@@ -21,6 +21,7 @@ class GalleryThemeData {
       ),
       canvasColor: colorScheme.background,
       scaffoldBackgroundColor: colorScheme.background,
+      highlightColor: Colors.transparent,
     );
   }
 
