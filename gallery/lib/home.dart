@@ -45,7 +45,7 @@ class HomePage extends StatelessWidget {
                   CarouselCard(
                     title: 'SHRINE',
                     subtitle: 'Basic shopping app',
-                    leftPadding: 24,
+                    leadingPadding: 24,
                   ),
                   CarouselCard(
                     title: 'RALLY',
@@ -54,6 +54,7 @@ class HomePage extends StatelessWidget {
                   CarouselCard(
                     title: 'CRANE',
                     subtitle: 'Basic shopping app',
+                    endPadding: 24,
                   ),
                 ],
               ),
@@ -89,17 +90,28 @@ class HomePage extends StatelessWidget {
 }
 
 class CarouselCard extends StatelessWidget {
-  const CarouselCard({Key key, this.title, this.subtitle, this.leftPadding = 0})
+  const CarouselCard(
+      {Key key,
+      this.title,
+      this.subtitle,
+      this.leadingPadding = 0,
+      this.endPadding = 0})
       : super(key: key);
 
   final String title;
   final String subtitle;
-  final double leftPadding;
+  final double leadingPadding;
+  final double endPadding;
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsetsDirectional.fromSTEB(8 + leftPadding, 0, 8, 0),
+      padding: EdgeInsetsDirectional.fromSTEB(
+        8 + leadingPadding,
+        0,
+        8 + endPadding,
+        0,
+      ),
       child: InkWell(
         onTap: () {
           Navigator.of(context).push<void>(
@@ -109,7 +121,6 @@ class CarouselCard extends StatelessWidget {
           );
         },
         child: Container(
-//          width: 296,
           width: MediaQuery.of(context).size.width * .85,
           child: Stack(
             fit: StackFit.expand,
@@ -135,10 +146,10 @@ class CarouselCard extends StatelessWidget {
                       style: Theme.of(context).textTheme.overline.apply(
                             color: Color(0xFF3E282A),
                           ),
-                    )
+                    ),
                   ],
                 ),
-              )
+              ),
             ],
           ),
         ),
@@ -173,7 +184,7 @@ class CategoryListItem extends StatelessWidget {
           child: Row(
             children: [
               Padding(
-                padding: EdgeInsets.fromLTRB(0, 8, 8, 8),
+                padding: EdgeInsets.fromLTRB(8, 8, 8, 8),
                 child: Image.asset(
                   (imageString),
                   width: 64,
