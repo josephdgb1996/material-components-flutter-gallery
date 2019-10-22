@@ -32,12 +32,13 @@ class HomePage extends StatelessWidget {
       body: ListView(
         children: [
           header(
-              context, Theme.of(context).colorScheme.primaryVariant, 'Gallery'),
+            context,
+            Theme.of(context).colorScheme.primaryVariant,
+            'Gallery',
+          ),
           Container(
-            margin: EdgeInsets.fromLTRB(16, 0, 0, 0),
             child: Container(
               height: 192,
-              width: 296,
               child: ListView(
                 scrollDirection: Axis.horizontal,
                 children: const [
@@ -59,14 +60,17 @@ class HomePage extends StatelessWidget {
           ),
           header(context, Theme.of(context).colorScheme.primary, 'Categories'),
           const CategoryListItem(
-              title: 'Material',
-              imageString: 'assets/icons/material/Icon-material@1x.png'),
+            title: 'Material',
+            imageString: 'assets/icons/1.0x/material.png',
+          ),
           const CategoryListItem(
-              title: 'Cupertino',
-              imageString: 'assets/icons/cupertino/Icon-cupertino 2@1x.png'),
+            title: 'Cupertino',
+            imageString: 'assets/icons/1.0x/cupertino.png',
+          ),
           const CategoryListItem(
-              title: 'Reference styles & media',
-              imageString: 'assets/icons/reference/Icon-reference@1x.png'),
+            title: 'Reference styles & media',
+            imageString: 'assets/icons/1.0x/reference.png',
+          ),
         ],
       ),
     );
@@ -91,54 +95,50 @@ class CarouselCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      children: [
-        GestureDetector(
-            onTap: () {
-              Navigator.of(context).push<void>(
-                MaterialPageRoute(
-                  builder: (context) => StudyPlaceholderPage(),
-                ),
-              );
-            },
-            child: Container(
-              width: MediaQuery.of(context).size.width * .9,
-              child: Stack(
-                fit: StackFit.expand,
-                children: [
-                  Container(
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(10),
-                      color: Theme.of(context).colorScheme.background,
-                      image: DecorationImage(
-                        image: AssetImage(
-                            'assets/icons/shrine_card/Shrine Card@1x.png'),
-                        fit: BoxFit.fill,
-                      ),
-                    ),
-                  ),
-                  Positioned(
-                    bottom: 16,
-                    left: 16,
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          title,
-                          style: Theme.of(context).textTheme.headline,
-                          textAlign: TextAlign.left,
-                        ),
-                        Text(
-                          subtitle,
-                          style: Theme.of(context).textTheme.subhead,
-                        )
-                      ],
-                    ),
-                  )
-                ],
+    return Padding(
+      padding: EdgeInsetsDirectional.fromSTEB(8, 0, 8, 0),
+      child: InkWell(
+        onTap: () {
+          Navigator.of(context).push<void>(
+            MaterialPageRoute(
+              builder: (context) => StudyPlaceholderPage(),
+            ),
+          );
+        },
+        child: Container(
+          width: MediaQuery.of(context).size.width * .9,
+          child: Stack(
+            fit: StackFit.expand,
+            children: [
+              Image.asset(
+                'assets/icons/1.0x/shrine_card.png',
+                fit: BoxFit.fill,
               ),
-            )),
-      ],
+              Positioned(
+                bottom: 16,
+                left: 16,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      title,
+                      style: Theme.of(context).textTheme.caption.apply(
+                            color: Color(0xFF3E282A),
+                          ),
+                    ),
+                    Text(
+                      subtitle,
+                      style: Theme.of(context).textTheme.overline.apply(
+                            color: Color(0xFF3E282A),
+                          ),
+                    )
+                  ],
+                ),
+              )
+            ],
+          ),
+        ),
+      ),
     );
   }
 }
@@ -154,35 +154,41 @@ class CategoryListItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return Padding(
       padding: EdgeInsets.fromLTRB(32, 8, 32, 8),
-      child: FlatButton(
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
-        color: Theme.of(context).colorScheme.onBackground,
-        onPressed: () {
+      child: InkWell(
+        onTap: () {
           Navigator.push<dynamic>(
             context,
             MaterialPageRoute<dynamic>(builder: (context) => DemoPage()),
           );
         },
-        child: Row(
-          children: [
-            Padding(
-              padding: EdgeInsets.fromLTRB(0, 8, 8, 8),
-              child: Image.asset(
-                (imageString),
-                width: 64,
-                height: 64,
+        child: Container(
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(10),
+            color: Theme.of(context).colorScheme.onBackground,
+          ),
+          child: Row(
+            children: [
+              Padding(
+                padding: EdgeInsets.fromLTRB(0, 8, 8, 8),
+                child: Image.asset(
+                  (imageString),
+                  width: 64,
+                  height: 64,
+                ),
               ),
-            ),
-            Flexible(
-              child: Padding(
-                padding: EdgeInsets.fromLTRB(8, 0, 0, 0),
-                child: Text(title.toUpperCase(),
+              Flexible(
+                child: Padding(
+                  padding: EdgeInsets.fromLTRB(8, 0, 0, 0),
+                  child: Text(
+                    title.toUpperCase(),
                     style: Theme.of(context).textTheme.headline.apply(
                           color: Colors.white,
-                        )),
+                        ),
+                  ),
+                ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );
