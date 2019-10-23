@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/painting.dart';
 
 import 'demo.dart';
 import 'settings.dart';
@@ -62,15 +61,15 @@ class HomePage extends StatelessWidget {
           ),
           header(context, Theme.of(context).colorScheme.primary, 'Categories'),
           const CategoryListItem(
-            title: 'Material',
+            title: 'MATERIAL',
             imageString: 'assets/icons/material/material.png',
           ),
           const CategoryListItem(
-            title: 'Cupertino',
+            title: 'CUPERTINO',
             imageString: 'assets/icons/cupertino/cupertino.png',
           ),
           const CategoryListItem(
-            title: 'Reference styles & media',
+            title: 'REFERENCE STYLES & MEDIA',
             imageString: 'assets/icons/reference/reference.png',
           ),
         ],
@@ -125,9 +124,12 @@ class CarouselCard extends StatelessWidget {
           child: Stack(
             fit: StackFit.expand,
             children: [
-              Image.asset(
-                'assets/icons/shrine_card/shrine_card.png',
-                fit: BoxFit.fill,
+              ClipRRect(
+                borderRadius: BorderRadius.circular(10),
+                child: Image.asset(
+                  'assets/icons/shrine_card/shrine_card.png',
+                  fit: BoxFit.fill,
+                ),
               ),
               Positioned(
                 bottom: 16,
@@ -195,7 +197,7 @@ class CategoryListItem extends StatelessWidget {
                 child: Padding(
                   padding: EdgeInsets.fromLTRB(8, 0, 0, 0),
                   child: Text(
-                    title.toUpperCase(),
+                    title,
                     style: Theme.of(context).textTheme.headline.apply(
                           color: Colors.white,
                         ),
