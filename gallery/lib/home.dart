@@ -128,7 +128,7 @@ class CarouselCard extends StatelessWidget {
                 borderRadius: BorderRadius.circular(10),
                 child: Image.asset(
                   'assets/icons/shrine_card/shrine_card.png',
-                  fit: BoxFit.fill,
+                  fit: BoxFit.cover,
                 ),
               ),
               Positioned(
@@ -186,7 +186,7 @@ class CategoryListItem extends StatelessWidget {
           child: Row(
             children: [
               Padding(
-                padding: EdgeInsets.fromLTRB(8, 8, 8, 8),
+                padding: EdgeInsets.all(8),
                 child: Image.asset(
                   (imageString),
                   width: 64,
