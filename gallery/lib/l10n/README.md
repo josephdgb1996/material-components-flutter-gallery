@@ -1,9 +1,19 @@
 # Localization
-
 ## Generating New Locale Messages
 When adding new strings to be localized, update `intl_en_US.arb`, which
-is used by this project as the template. From `gallery/`, run
-`dart ../l10n_cli/bin/main.dart` , which will generate
+is used by this project as the template. When creating new entries, they
+have to be in the following format:
+```
+  "${dartGetterVariableName}": "${translation of the message}",
+  "@${dartGetterVariableName}": {
+    "description": "${description that the localizations delegate will use.}"
+  },
+```
+
+In this example, `dartGetterVariableName` should be the Dart method/property
+name that you will be using in your localizations delegate.
+
+From `gallery/`, run `dart ../l10n_cli/bin/main.dart`, which will generate
 `intl_en_US.xml`. This will be used by the internal translation console to
 generate messages in the different locales.
 
