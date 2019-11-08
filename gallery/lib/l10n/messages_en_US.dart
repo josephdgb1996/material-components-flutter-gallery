@@ -1,5 +1,5 @@
 // DO NOT EDIT. This is code generated via package:intl/generate_localized.dart
-// This is a library that provides messages for a as locale. All the
+// This is a library that provides messages for a en_US locale. All the
 // messages from the main program should be duplicated here with the same
 // function name.
 
@@ -17,7 +17,7 @@ final messages = new MessageLookup();
 typedef String MessageIfAbsent(String messageStr, List<dynamic> args);
 
 class MessageLookup extends MessageLookupByLibrary {
-  String get localeName => 'as';
+  String get localeName => 'en_US';
 
   static m0(value) => "You selected: \"${value}\"";
 
@@ -86,9 +86,11 @@ class MessageLookup extends MessageLookupByLibrary {
     "demoDialogSubtitle" : MessageLookupByLibrary.simpleMessage("Simple, alert, and fullscreen"),
     "demoDialogTitle" : MessageLookupByLibrary.simpleMessage("Dialogs"),
     "demoDocumentationTooltip" : MessageLookupByLibrary.simpleMessage("API Documentation"),
+    "demoFlatButtonDescription" : MessageLookupByLibrary.simpleMessage("A flat button displays an ink splash on press but does not lift. Use flat buttons on toolbars, in dialogs and inline with padding"),
     "demoFlatButtonTitle" : MessageLookupByLibrary.simpleMessage("Flat Button"),
     "demoFloatingButtonDescription" : MessageLookupByLibrary.simpleMessage("A floating action button is a circular icon button that hovers over content to promote a primary action in the application."),
     "demoFloatingButtonTitle" : MessageLookupByLibrary.simpleMessage("Floating Action Button"),
+    "demoFullscreenDialogDescription" : MessageLookupByLibrary.simpleMessage("The fullscreenDialog property specifies whether the incoming page is a fullscreen modal dialog"),
     "demoFullscreenDialogTitle" : MessageLookupByLibrary.simpleMessage("Fullscreen"),
     "demoFullscreenTooltip" : MessageLookupByLibrary.simpleMessage("Full Screen"),
     "demoInfoTooltip" : MessageLookupByLibrary.simpleMessage("Info"),
@@ -119,6 +121,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "homeCategoryReference" : MessageLookupByLibrary.simpleMessage("REFERENCE STYLES & MEDIA"),
     "homeHeaderCategories" : MessageLookupByLibrary.simpleMessage("Categories"),
     "homeHeaderGallery" : MessageLookupByLibrary.simpleMessage("Gallery"),
+    "rallyDescription" : MessageLookupByLibrary.simpleMessage("A personal finance app"),
     "settingsAbout" : MessageLookupByLibrary.simpleMessage("About Flutter Gallery"),
     "settingsAttribution" : MessageLookupByLibrary.simpleMessage("Designed by TOASTER in London"),
     "settingsDarkTheme" : MessageLookupByLibrary.simpleMessage("Dark theme"),

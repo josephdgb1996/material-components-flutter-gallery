@@ -2,10 +2,8 @@ import 'dart:io';
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_localizations/flutter_localizations.dart';
 
 import 'l10n/localizations_delegate.dart';
-import 'l10n/supported_locales.dart';
 import 'pages/backdrop.dart';
 import 'pages/home.dart';
 import 'pages/settings.dart';
@@ -36,13 +34,8 @@ class MyApp extends StatelessWidget {
       themeMode: ThemeMode.system,
       theme: GalleryThemeData.lightThemeData,
       darkTheme: GalleryThemeData.darkThemeData,
-      localizationsDelegates: [
-        GalleryLocalizationsDelegate(),
-        GlobalCupertinoLocalizations.delegate,
-        GlobalMaterialLocalizations.delegate,
-        GlobalWidgetsLocalizations.delegate,
-      ],
-      supportedLocales: supportedLocales,
+      localizationsDelegates: GalleryLocalizations.localizationsDelegates,
+      supportedLocales: GalleryLocalizations.supportedLocales,
       home: Backdrop(
         frontLayer: SettingsPage(),
         backLayer: HomePage(),

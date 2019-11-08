@@ -1,999 +1,1207 @@
-import 'package:flutter/material.dart';
+import 'dart:async';
+
+import 'package:flutter/widgets.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:intl/intl.dart';
 
 import 'messages_all.dart';
-import 'supported_locales.dart';
 
+/// Callers can lookup localized strings with an instance of GalleryLocalizations returned
+/// by `GalleryLocalizations.of(context)`.
+///
+/// Applications need to include `GalleryLocalizations.delegate()` in their app's
+/// localizationDelegates list, and the locales they support in the app's
+/// supportedLocales list. For example:
+///
+/// ```
+/// import 'l10n/localizations_delegate.dart';
+///
+/// return MaterialApp(
+///   localizationsDelegates: GalleryLocalizations.localizationsDelegates,
+///   supportedLocales: GalleryLocalizations.supportedLocales,
+///   home: MyApplicationHome(),
+/// );
+/// ```
+///
+/// ## Update pubspec.yaml
+///
+/// Please make sure to update your pubspec.yaml to include the following
+/// packages:
+///
+/// ```
+/// dependencies:
+///   # Internationalization support.
+///   flutter_localizations:
+///     sdk: flutter
+///   intl: 0.16.0
+///   intl_translation: 0.17.7
+///
+///   # rest of dependencies
+/// ```
+///
+/// ## iOS Applications
+///
+/// iOS applications define key application metadata, including supported
+/// locales, in an Info.plist file that is built into the application bundle.
+/// To configure the locales supported by your app, you’ll need to edit this
+/// file.
+///
+/// First, open your project’s ios/Runner.xcworkspace Xcode workspace file.
+/// Then, in the Project Navigator, open the Info.plist file under the Runner
+/// project’s Runner folder.
+///
+/// Next, select the Information Property List item, select Add Item from the
+/// Editor menu, then select Localizations from the pop-up menu.
+///
+/// Select and expand the newly-created Localizations item then, for each
+/// locale your application supports, add a new item and select the locale
+/// you wish to add from the pop-up menu in the Value field. This list should
+/// be consistent with the languages listed in the GalleryLocalizations.supportedLocales
+/// property.
 class GalleryLocalizations {
-  GalleryLocalizations(this.localeName);
+  GalleryLocalizations(Locale locale) : _localeName = locale.toString();
 
-  static Future<GalleryLocalizations> load(Locale locale) async {
-    final localeName = Intl.canonicalizedLocale(locale.toString());
-    await initializeMessages(localeName);
-    Intl.defaultLocale = localeName;
-    return GalleryLocalizations(localeName);
+  final String _localeName;
+
+  static Future<GalleryLocalizations> load(Locale locale) {
+    return initializeMessages(locale.toString())
+      .then<GalleryLocalizations>((void _) => GalleryLocalizations(locale));
   }
 
   static GalleryLocalizations of(BuildContext context) {
-    return Localizations.of<GalleryLocalizations>(
-      context,
-      GalleryLocalizations,
-    );
+    return Localizations.of<GalleryLocalizations>(context, GalleryLocalizations);
   }
 
-  final String localeName;
+  static const LocalizationsDelegate<GalleryLocalizations> delegate = _GalleryLocalizationsDelegate();
+
+  /// A list of this localizations delegate along with the default localizations
+  /// delegates.
+  ///
+  /// Returns a list of localizations delegates containing this delegate along with
+  /// GlobalMaterialLocalizations.delegate, GlobalCupertinoLocalizations.delegate,
+  /// and GlobalWidgetsLocalizations.delegate.
+  static const List<LocalizationsDelegate<dynamic>> localizationsDelegates = <LocalizationsDelegate<dynamic>>[
+    delegate,
+    GlobalMaterialLocalizations.delegate,
+    GlobalCupertinoLocalizations.delegate,
+    GlobalWidgetsLocalizations.delegate,
+  ];
+
+  /// A list of this localizations delegate's supported locales.
+  static const List<Locale> supportedLocales = <Locale>[
+    Locale('ko'),
+    Locale('es'),
+    Locale('gl'),
+    Locale('en', 'ZA'),
+    Locale('si'),
+    Locale('es', 'NI'),
+    Locale('es', 'CO'),
+    Locale('fi'),
+    Locale('da'),
+    Locale('hu'),
+    Locale('kn'),
+    Locale('ky'),
+    Locale('id'),
+    Locale('is'),
+    Locale('es', 'AR'),
+    Locale('ar', 'SA'),
+    Locale('es', 'CL'),
+    Locale('ro'),
+    Locale('sk'),
+    Locale('km'),
+    Locale('en', 'CA'),
+    Locale('hr'),
+    Locale('he'),
+    Locale('pt', 'BR'),
+    Locale('eu'),
+    Locale('pt'),
+    Locale('fr', 'CA'),
+    Locale('es', 'US'),
+    Locale('de', 'CH'),
+    Locale('et'),
+    Locale('de'),
+    Locale('gsw'),
+    Locale('sl'),
+    Locale('es', 'BO'),
+    Locale('de', 'AT'),
+    Locale('pa'),
+    Locale('kk'),
+    Locale('it'),
+    Locale('ml'),
+    Locale('sr'),
+    Locale('es', 'SV'),
+    Locale('uk'),
+    Locale('es', '419'),
+    Locale('or'),
+    Locale('cs'),
+    Locale('es', 'PY'),
+    Locale('tl'),
+    Locale('am'),
+    Locale('az'),
+    Locale('mn'),
+    Locale('my'),
+    Locale('nb'),
+    Locale('en', 'IE'),
+    Locale('be'),
+    Locale('ca'),
+    Locale('th'),
+    Locale('pt', 'PT'),
+    Locale('es', 'DO'),
+    Locale('es', 'GT'),
+    Locale('ar', 'MA'),
+    Locale('zu'),
+    Locale('uz'),
+    Locale('bs'),
+    Locale('lo'),
+    Locale('mk'),
+    Locale('ne'),
+    Locale('fil'),
+    Locale('es', 'HN'),
+    Locale('bg'),
+    Locale('mr'),
+    Locale('lv'),
+    Locale('af'),
+    Locale('es', 'PE'),
+    Locale('es', 'PR'),
+    Locale('ms'),
+    Locale('en', 'GB'),
+    Locale('ar'),
+    Locale('en', 'SG'),
+    Locale('tr'),
+    Locale('te'),
+    Locale('as'),
+    Locale('lt'),
+    Locale('vi'),
+    Locale('ur'),
+    Locale('ta'),
+    Locale('es', 'EC'),
+    Locale('zh', 'HK'),
+    Locale('nl'),
+    Locale('es', 'PA'),
+    Locale('zh'),
+    Locale('en', 'IN'),
+    Locale('bn'),
+    Locale('en', 'AU'),
+    Locale('fa'),
+    Locale('en', 'NZ'),
+    Locale('pl'),
+    Locale('sw'),
+    Locale('ar', 'EG'),
+    Locale('sv'),
+    Locale('el'),
+    Locale('zh', 'TW'),
+    Locale('ja'),
+    Locale('hi'),
+    Locale('en', 'US'),
+    Locale('es', 'MX'),
+    Locale('es', 'VE'),
+    Locale('es', 'CR'),
+    Locale('ru'),
+    Locale('sq'),
+    Locale('zh', 'CN'),
+    Locale('fr', 'CH'),
+    Locale('ar', 'JO'),
+    Locale('gu'),
+    Locale('ka'),
+    Locale('sr'),
+    Locale('es', 'UY'),
+    Locale('fr'),
+    Locale('hy'),
+  ];
 
   String get homeHeaderGallery {
     return Intl.message(
-      'Gallery',
-      desc: 'Header title on home screen for Gallery section.',
-      locale: localeName,
+      r'Gallery',
+      locale: _localeName,
+      name: 'homeHeaderGallery',
+      desc: r'Header title on home screen for Gallery section.'
     );
   }
 
   String get homeHeaderCategories {
     return Intl.message(
-      'Categories',
-      desc: 'Header title on home screen for Categories section.',
-      locale: localeName,
-    );
-  }
-
-  String get shrineTitle {
-    return Intl.message(
-      'SHRINE',
-      desc: 'Study title for Shrine.',
-      locale: localeName,
-      skip: true,
+      r'Categories',
+      locale: _localeName,
+      name: 'homeHeaderCategories',
+      desc: r'Header title on home screen for Categories section.'
     );
   }
 
   String get shrineDescription {
     return Intl.message(
-      'A fashionable retail app',
-      desc: 'Study description for Shrine.',
-      locale: localeName,
-    );
-  }
-
-  String get rallyTitle {
-    return Intl.message(
-      'RALLY',
-      desc: 'Study title for Rally.',
-      locale: localeName,
-      skip: true,
+      r'A fashionable retail app',
+      locale: _localeName,
+      name: 'shrineDescription',
+      desc: r'Study description for Shrine.'
     );
   }
 
   String get rallyDescription {
     return Intl.message(
-      'A personal finance app',
-      desc: 'Study description for Rally.',
-      locale: localeName,
-      skip: true,
-    );
-  }
-
-  String get craneTitle {
-    return Intl.message(
-      'CRANE',
-      desc: 'Study title for Crane.',
-      locale: localeName,
-      skip: true,
+      r'A personal finance app',
+      locale: _localeName,
+      name: 'rallyDescription',
+      desc: r'Study description for Rally.'
     );
   }
 
   String get craneDescription {
     return Intl.message(
-      'A personalized travel app',
-      desc: 'Study description for Crane.',
-      locale: localeName,
-    );
-  }
-
-  String get homeCategoryMaterial {
-    return Intl.message(
-      'MATERIAL',
-      desc: 'Category title on home screen for Material.',
-      locale: localeName,
-      skip: true,
-    );
-  }
-
-  String get homeCategoryCupertino {
-    return Intl.message(
-      'CUPERTINO',
-      desc: 'Category title on home screen for Cupertino.',
-      locale: localeName,
-      skip: true,
+      r'A personalized travel app',
+      locale: _localeName,
+      name: 'craneDescription',
+      desc: r'Study description for Crane.'
     );
   }
 
   String get homeCategoryReference {
     return Intl.message(
-      'REFERENCE STYLES & MEDIA',
-      desc: 'Category title on home screen for reference styles & media.',
-      locale: localeName,
+      r'REFERENCE STYLES & MEDIA',
+      locale: _localeName,
+      name: 'homeCategoryReference',
+      desc: r'Category title on home screen for reference styles & media.'
     );
   }
 
   String get demoInvalidURL {
     return Intl.message(
-      'Couldn\'t display URL:',
-      desc: 'Error message when opening the URL for a demo.',
-      locale: localeName,
+      r'Couldn' "'" r't display URL:',
+      locale: _localeName,
+      name: 'demoInvalidURL',
+      desc: r'Error message when opening the URL for a demo.'
     );
   }
 
   String get demoOptionsTooltip {
     return Intl.message(
-      'Options',
-      desc: 'Tooltip for options button in a demo.',
-      locale: localeName,
+      r'Options',
+      locale: _localeName,
+      name: 'demoOptionsTooltip',
+      desc: r'Tooltip for options button in a demo.'
     );
   }
 
   String get demoInfoTooltip {
     return Intl.message(
-      'Info',
-      desc: 'Tooltip for info button in a demo.',
-      locale: localeName,
+      r'Info',
+      locale: _localeName,
+      name: 'demoInfoTooltip',
+      desc: r'Tooltip for info button in a demo.'
     );
   }
 
   String get demoCodeTooltip {
     return Intl.message(
-      'Code Sample',
-      desc: 'Tooltip for code sample button in a demo.',
-      locale: localeName,
+      r'Code Sample',
+      locale: _localeName,
+      name: 'demoCodeTooltip',
+      desc: r'Tooltip for code sample button in a demo.'
     );
   }
 
   String get demoDocumentationTooltip {
     return Intl.message(
-      'API Documentation',
-      desc: 'Tooltip for API documentation button in a demo.',
-      locale: localeName,
+      r'API Documentation',
+      locale: _localeName,
+      name: 'demoDocumentationTooltip',
+      desc: r'Tooltip for API documentation button in a demo.'
     );
   }
 
   String get demoFullscreenTooltip {
     return Intl.message(
-      'Full Screen',
-      desc: 'Tooltip for Full Screen button in a demo.',
-      locale: localeName,
+      r'Full Screen',
+      locale: _localeName,
+      name: 'demoFullscreenTooltip',
+      desc: r'Tooltip for Full Screen button in a demo.'
     );
   }
 
-  // Settings
-
   String get settingsTextScaling {
     return Intl.message(
-      'Text scaling',
-      desc: 'Title for text scaling setting.',
-      locale: localeName,
+      r'Text scaling',
+      locale: _localeName,
+      name: 'settingsTextScaling',
+      desc: r'Title for text scaling setting.'
     );
   }
 
   String get settingsTextDirection {
     return Intl.message(
-      'Text direction',
-      desc: 'Title for text direction setting.',
-      locale: localeName,
+      r'Text direction',
+      locale: _localeName,
+      name: 'settingsTextDirection',
+      desc: r'Title for text direction setting.'
     );
   }
 
   String get settingsLocale {
     return Intl.message(
-      'Locale',
-      desc: 'Title for locale setting.',
-      locale: localeName,
+      r'Locale',
+      locale: _localeName,
+      name: 'settingsLocale',
+      desc: r'Title for locale setting.'
     );
   }
 
   String get settingsPlatformMechanics {
     return Intl.message(
-      'Platform mechanics',
-      desc: 'Title for platform mechanics (iOS/Android) setting.',
-      locale: localeName,
+      r'Platform mechanics',
+      locale: _localeName,
+      name: 'settingsPlatformMechanics',
+      desc: r'Title for platform mechanics (iOS/Android) setting.'
     );
   }
 
   String get settingsDarkTheme {
     return Intl.message(
-      'Dark theme',
-      desc: 'Title for dark theme setting.',
-      locale: localeName,
+      r'Dark theme',
+      locale: _localeName,
+      name: 'settingsDarkTheme',
+      desc: r'Title for dark theme setting.'
     );
   }
 
   String get settingsSlowMotion {
     return Intl.message(
-      'Slow motion',
-      desc: 'Title for slow motion setting.',
-      locale: localeName,
+      r'Slow motion',
+      locale: _localeName,
+      name: 'settingsSlowMotion',
+      desc: r'Title for slow motion setting.'
     );
   }
 
   String get settingsAbout {
     return Intl.message(
-      'About Flutter Gallery',
-      desc: 'Title for information button.',
-      locale: localeName,
+      r'About Flutter Gallery',
+      locale: _localeName,
+      name: 'settingsAbout',
+      desc: r'Title for information button.'
     );
   }
 
   String get settingsFeedback {
     return Intl.message(
-      'Send feedback',
-      desc: 'Title for feedback button.',
-      locale: localeName,
+      r'Send feedback',
+      locale: _localeName,
+      name: 'settingsFeedback',
+      desc: r'Title for feedback button.'
     );
   }
 
   String get settingsAttribution {
     return Intl.message(
-      'Designed by TOASTER in London',
-      desc:
-          'Title for attribution (TOASTER is a proper name and should remain in English).',
-      locale: localeName,
+      r'Designed by TOASTER in London',
+      locale: _localeName,
+      name: 'settingsAttribution',
+      desc: r'Title for attribution (TOASTER is a proper name and should remain in English).'
     );
   }
 
-  // Material component demo list.
-
   String get demoButtonTitle {
     return Intl.message(
-      'Buttons',
-      desc: 'Title for the material buttons component demo.',
-      locale: localeName,
+      r'Buttons',
+      locale: _localeName,
+      name: 'demoButtonTitle',
+      desc: r'Title for the material buttons component demo.'
     );
   }
 
   String get demoButtonSubtitle {
     return Intl.message(
-      'Flat, raised, outline, and more',
-      desc: 'Subtitle for the material buttons component demo.',
-      locale: localeName,
+      r'Flat, raised, outline, and more',
+      locale: _localeName,
+      name: 'demoButtonSubtitle',
+      desc: r'Subtitle for the material buttons component demo.'
     );
   }
 
   String get demoFlatButtonTitle {
     return Intl.message(
-      'Flat Button',
-      desc: 'Title for the flat button component demo.',
-      locale: localeName,
+      r'Flat Button',
+      locale: _localeName,
+      name: 'demoFlatButtonTitle',
+      desc: r'Title for the flat button component demo.'
     );
   }
 
   String get demoFlatButtonDescription {
     return Intl.message(
-      'A flat button displays an ink splash on press but does not lift. Use '
-      'flat buttons on toolbars, in dialogs and inline with padding',
-      desc: 'Description for the flat button component demo.',
-      locale: localeName,
+      r'A flat button displays an ink splash on press but does not lift. Use flat buttons on toolbars, in dialogs and inline with padding',
+      locale: _localeName,
+      name: 'demoFlatButtonDescription',
+      desc: r'Description for the flat button component demo.'
     );
   }
 
   String get demoRaisedButtonTitle {
     return Intl.message(
-      'Raised Button',
-      desc: 'Title for the raised button component demo.',
-      locale: localeName,
+      r'Raised Button',
+      locale: _localeName,
+      name: 'demoRaisedButtonTitle',
+      desc: r'Title for the raised button component demo.'
     );
   }
 
   String get demoRaisedButtonDescription {
     return Intl.message(
-      'Raised buttons add dimension to mostly flat layouts. They emphasize '
-      'functions on busy or wide spaces.',
-      desc: 'Description for the raised button component demo.',
-      locale: localeName,
+      r'Raised buttons add dimension to mostly flat layouts. They emphasize functions on busy or wide spaces.',
+      locale: _localeName,
+      name: 'demoRaisedButtonDescription',
+      desc: r'Description for the raised button component demo.'
     );
   }
 
   String get demoOutlineButtonTitle {
     return Intl.message(
-      'Outline Button',
-      desc: 'Title for the outline button component demo.',
-      locale: localeName,
+      r'Outline Button',
+      locale: _localeName,
+      name: 'demoOutlineButtonTitle',
+      desc: r'Title for the outline button component demo.'
     );
   }
 
   String get demoOutlineButtonDescription {
     return Intl.message(
-      'Outline buttons become opaque and elevate when pressed. They are often '
-      'paired with raised buttons to indicate an alternative, secondary '
-      'action.',
-      desc: 'Description for the outline button component demo.',
-      locale: localeName,
+      r'Outline buttons become opaque and elevate when pressed. They are often paired with raised buttons to indicate an alternative, secondary action.',
+      locale: _localeName,
+      name: 'demoOutlineButtonDescription',
+      desc: r'Description for the outline button component demo.'
     );
   }
 
   String get demoToggleButtonTitle {
     return Intl.message(
-      'Toggle Buttons',
-      desc: 'Title for the toggle buttons component demo.',
-      locale: localeName,
+      r'Toggle Buttons',
+      locale: _localeName,
+      name: 'demoToggleButtonTitle',
+      desc: r'Title for the toggle buttons component demo.'
     );
   }
 
   String get demoToggleButtonDescription {
     return Intl.message(
-      'Toggle buttons can be used to group related options. To emphasize '
-      'groups of related toggle buttons, a group should share a common '
-      'container',
-      desc: 'Description for the toggle buttons component demo.',
-      locale: localeName,
+      r'Toggle buttons can be used to group related options. To emphasize groups of related toggle buttons, a group should share a common container',
+      locale: _localeName,
+      name: 'demoToggleButtonDescription',
+      desc: r'Description for the toggle buttons component demo.'
     );
   }
 
   String get demoFloatingButtonTitle {
     return Intl.message(
-      'Floating Action Button',
-      desc: 'Title for the floating action button component demo.',
-      locale: localeName,
+      r'Floating Action Button',
+      locale: _localeName,
+      name: 'demoFloatingButtonTitle',
+      desc: r'Title for the floating action button component demo.'
     );
   }
 
   String get demoFloatingButtonDescription {
     return Intl.message(
-      'A floating action button is a circular icon button that hovers over '
-      'content to promote a primary action in the application.',
-      desc: 'Description for the floating action button component demo.',
-      locale: localeName,
+      r'A floating action button is a circular icon button that hovers over content to promote a primary action in the application.',
+      locale: _localeName,
+      name: 'demoFloatingButtonDescription',
+      desc: r'Description for the floating action button component demo.'
     );
   }
 
   String get demoDialogTitle {
     return Intl.message(
-      'Dialogs',
-      desc: 'Title for the material buttons component demo.',
-      locale: localeName,
+      r'Dialogs',
+      locale: _localeName,
+      name: 'demoDialogTitle',
+      desc: r'Title for the material buttons component demo.'
     );
   }
 
   String get demoDialogSubtitle {
     return Intl.message(
-      'Simple, alert, and fullscreen',
-      desc: 'Subtitle for the material dialog component demo.',
-      locale: localeName,
+      r'Simple, alert, and fullscreen',
+      locale: _localeName,
+      name: 'demoDialogSubtitle',
+      desc: r'Subtitle for the material dialog component demo.'
     );
   }
 
   String get demoAlertDialogTitle {
     return Intl.message(
-      'Alert',
-      desc: 'Title for the alert dialog component demo.',
-      locale: localeName,
+      r'Alert',
+      locale: _localeName,
+      name: 'demoAlertDialogTitle',
+      desc: r'Title for the alert dialog component demo.'
     );
   }
 
   String get demoAlertDialogDescription {
     return Intl.message(
-      'An alert dialog informs the user about situations that require '
-      'acknowledgement. An alert dialog has an optional title and an optional '
-      'list of actions.',
-      desc: 'Description for the alert dialog component demo.',
-      locale: localeName,
+      r'An alert dialog informs the user about situations that require acknowledgement. An alert dialog has an optional title and an optional list of actions.',
+      locale: _localeName,
+      name: 'demoAlertDialogDescription',
+      desc: r'Description for the alert dialog component demo.'
     );
   }
 
   String get demoAlertTitleDialogTitle {
     return Intl.message(
-      'Alert With Title',
-      desc: 'Title for the alert dialog with title component demo.',
-      locale: localeName,
+      r'Alert With Title',
+      locale: _localeName,
+      name: 'demoAlertTitleDialogTitle',
+      desc: r'Title for the alert dialog with title component demo.'
     );
   }
 
   String get demoSimpleDialogTitle {
     return Intl.message(
-      'Simple',
-      desc: 'Title for the simple dialog component demo.',
-      locale: localeName,
+      r'Simple',
+      locale: _localeName,
+      name: 'demoSimpleDialogTitle',
+      desc: r'Title for the simple dialog component demo.'
     );
   }
 
   String get demoSimpleDialogDescription {
     return Intl.message(
-      'A simple dialog offers the user a choice between several options. A '
-      'simple dialog has an optional title that is displayed above the '
-      'choices.',
-      desc: 'Description for the simple dialog component demo.',
-      locale: localeName,
+      r'A simple dialog offers the user a choice between several options. A simple dialog has an optional title that is displayed above the choices.',
+      locale: _localeName,
+      name: 'demoSimpleDialogDescription',
+      desc: r'Description for the simple dialog component demo.'
     );
   }
 
   String get demoFullscreenDialogTitle {
     return Intl.message(
-      'Fullscreen',
-      desc: 'Title for the fullscreen dialog component demo.',
-      locale: localeName,
+      r'Fullscreen',
+      locale: _localeName,
+      name: 'demoFullscreenDialogTitle',
+      desc: r'Title for the fullscreen dialog component demo.'
     );
   }
 
   String get demoFullscreenDialogDescription {
     return Intl.message(
-      'The fullscreenDialog property specifies whether the incoming page is a '
-      'fullscreen modal dialog',
-      desc: 'Description for the fullscreen dialog component demo.',
-      locale: localeName,
+      r'The fullscreenDialog property specifies whether the incoming page is a fullscreen modal dialog',
+      locale: _localeName,
+      name: 'demoFullscreenDialogDescription',
+      desc: r'Description for the fullscreen dialog component demo.'
     );
   }
 
-  // Cupertino component demo list.
-
   String get demoCupertinoButtonsTitle {
     return Intl.message(
-      'Buttons',
-      desc: 'Title for the cupertino buttons component demo.',
-      locale: localeName,
+      r'The fullscreenDialog property specifies whether the incoming page is a fullscreen modal dialog',
+      locale: _localeName,
+      name: 'demoCupertinoButtonsTitle',
+      desc: r'Description for the fullscreen dialog component demo.'
     );
   }
 
   String get demoCupertinoButtonsSubtitle {
     return Intl.message(
-      'iOS-style buttons',
-      desc: 'Subtitle for the cupertino buttons component demo.',
-      locale: localeName,
+      r'iOS-style buttons',
+      locale: _localeName,
+      name: 'demoCupertinoButtonsSubtitle',
+      desc: r'Subtitle for the cupertino buttons component demo.'
     );
   }
 
   String get demoCupertinoButtonsDescription {
     return Intl.message(
-      'An iOS-style button. It takes in text and/or an icon that fades out and '
-      'in on touch. May optionally have a background.',
-      desc: 'Description for the cupertino buttons component demo.',
-      locale: localeName,
+      r'An iOS-style button. It takes in text and/or an icon that fades out and in on touch. May optionally have a background.',
+      locale: _localeName,
+      name: 'demoCupertinoButtonsDescription',
+      desc: r'Description for the cupertino buttons component demo.'
     );
   }
 
   String get demoCupertinoAlertsTitle {
     return Intl.message(
-      'Alerts',
-      desc: 'Title for the cupertino alerts component demo.',
-      locale: localeName,
+      r'Alerts',
+      locale: _localeName,
+      name: 'demoCupertinoAlertsTitle',
+      desc: r'Title for the cupertino alerts component demo.'
     );
   }
 
   String get demoCupertinoAlertsSubtitle {
     return Intl.message(
-      'iOS-style alert dialogs',
-      desc: 'Subtitle for the cupertino alerts component demo.',
-      locale: localeName,
+      r'iOS-style alert dialogs',
+      locale: _localeName,
+      name: 'demoCupertinoAlertsSubtitle',
+      desc: r'Subtitle for the cupertino alerts component demo.'
     );
   }
 
   String get demoCupertinoAlertTitle {
     return Intl.message(
-      'Alert',
-      desc: 'Title for the cupertino alert component demo.',
-      locale: localeName,
+      r'Alert',
+      locale: _localeName,
+      name: 'demoCupertinoAlertTitle',
+      desc: r'Title for the cupertino alert component demo.'
     );
   }
 
   String get demoCupertinoAlertDescription {
     return Intl.message(
-      'An alert dialog informs the user about situations that require '
-      'acknowledgement. An alert dialog has an optional title, optional '
-      'content, and an optional list of actions. The title is displayed above '
-      'the content and the actions are displayed below the content.',
-      desc: 'Description for the cupertino alert component demo.',
-      locale: localeName,
+      r'An alert dialog informs the user about situations that require acknowledgement. An alert dialog has an optional title, optional content, and an optional list of actions. The title is displayed above the content and the actions are displayed below the content.',
+      locale: _localeName,
+      name: 'demoCupertinoAlertDescription',
+      desc: r'Description for the cupertino alert component demo.'
     );
   }
 
   String get demoCupertinoAlertWithTitleTitle {
     return Intl.message(
-      'Alert With Title',
-      desc: 'Title for the cupertino alert with title component demo.',
-      locale: localeName,
+      r'Alert With Title',
+      locale: _localeName,
+      name: 'demoCupertinoAlertWithTitleTitle',
+      desc: r'Title for the cupertino alert with title component demo.'
     );
   }
 
   String get demoCupertinoAlertButtonsTitle {
     return Intl.message(
-      'Alert With Buttons',
-      desc: 'Title for the cupertino alert with buttons component demo.',
-      locale: localeName,
+      r'Alert With Buttons',
+      locale: _localeName,
+      name: 'demoCupertinoAlertButtonsTitle',
+      desc: r'Title for the cupertino alert with buttons component demo.'
     );
   }
 
   String get demoCupertinoAlertButtonsOnlyTitle {
     return Intl.message(
-      'Alert Buttons Only',
-      desc: 'Title for the cupertino alert buttons only component demo.',
-      locale: localeName,
+      r'Alert Buttons Only',
+      locale: _localeName,
+      name: 'demoCupertinoAlertButtonsOnlyTitle',
+      desc: r'Title for the cupertino alert buttons only component demo.'
     );
   }
 
   String get demoCupertinoActionSheetTitle {
     return Intl.message(
-      'Action Sheet',
-      desc: 'Title for the cupertino action sheet component demo.',
-      locale: localeName,
+      r'Action Sheet',
+      locale: _localeName,
+      name: 'demoCupertinoActionSheetTitle',
+      desc: r'Title for the cupertino action sheet component demo.'
     );
   }
 
   String get demoCupertinoActionSheetDescription {
     return Intl.message(
-      'An action sheet is a specific style of alert that presents the user '
-      'with a set of two or more choices related to the current context. An '
-      'action sheet can have a title, an additional message, and a list of '
-      'actions.',
-      desc: 'Description for the cupertino action sheet component demo.',
-      locale: localeName,
+      r'An action sheet is a specific style of alert that presents the user with a set of two or more choices related to the current context. An action sheet can have a title, an additional message, and a list of actions.',
+      locale: _localeName,
+      name: 'demoCupertinoActionSheetDescription',
+      desc: r'Description for the cupertino action sheet component demo.'
     );
   }
 
-  // References demo list.
-
   String get demoColorsTitle {
     return Intl.message(
-      'Colors',
-      desc: 'Title for the colors demo.',
-      locale: localeName,
+      r'Colors',
+      locale: _localeName,
+      name: 'demoColorsTitle',
+      desc: r'Title for the colors demo.'
     );
   }
 
   String get demoColorsSubtitle {
     return Intl.message(
-      'All of the predefined colors',
-      desc: 'Subtitle for the colors demo.',
-      locale: localeName,
+      r'All of the predefined colors',
+      locale: _localeName,
+      name: 'demoColorsSubtitle',
+      desc: r'Subtitle for the colors demo.'
     );
   }
 
   String get demoColorsDescription {
     return Intl.message(
-      'Color and color swatch constants which represent Material design\'s '
-      'color palette.',
-      desc: 'Description for the colors demo.',
-      locale: localeName,
+      r'Color and color swatch constants which represent Material design' "'" r's color palette.',
+      locale: _localeName,
+      name: 'demoColorsDescription',
+      desc: r'Description for the colors demo.'
     );
   }
 
-  // Material component demo content.
-
   String get buttonTextEnabled {
     return Intl.message(
-      'ENABLED',
-      desc: 'Text for an enabled button.',
-      locale: localeName,
+      r'ENABLED',
+      locale: _localeName,
+      name: 'buttonTextEnabled',
+      desc: r'Text for an enabled button.'
     );
   }
 
   String get buttonTextDisabled {
     return Intl.message(
-      'DISABLED',
-      desc: 'Text for a disabled button.',
-      locale: localeName,
+      r'DISABLED',
+      locale: _localeName,
+      name: 'buttonTextDisabled',
+      desc: r'Text for a disabled button.'
     );
   }
 
   String get buttonTextCreate {
     return Intl.message(
-      'Create',
-      desc: 'Tooltip text for a create button.',
-      locale: localeName,
+      r'Create',
+      locale: _localeName,
+      name: 'buttonTextCreate',
+      desc: r'Tooltip text for a create button.'
     );
   }
 
-  String dialogSelectedOption(String value) {
+  String dialogSelectedOption(Object value) {
     return Intl.message(
-      'You selected: "$value"',
-      desc: 'Message displayed after an option is selected from a dialog',
-      name: 'GalleryLocalizations_dialogSelectedOption',
-      args: [value],
-      examples: const {'value': 'AGREE'},
+      r'You selected: "$value"',
+      locale: _localeName,
+      name: 'dialogSelectedOption',
+      desc: r'Message displayed after an option is selected from a dialog',
+      args: <Object>[value]
     );
   }
 
   String get dialogDiscardTitle {
     return Intl.message(
-      'Discard draft?',
-      desc: 'Alert dialog message to discard draft.',
-      locale: localeName,
+      r'Discard draft?',
+      locale: _localeName,
+      name: 'dialogDiscardTitle',
+      desc: r'Alert dialog message to discard draft.'
     );
   }
 
   String get dialogLocationTitle {
     return Intl.message(
-      'Use Google\'s location service?',
-      desc: 'Alert dialog title to use location services.',
-      locale: localeName,
+      r'Use Google' "'" r's location service?',
+      locale: _localeName,
+      name: 'dialogLocationTitle',
+      desc: r'Alert dialog title to use location services.'
     );
   }
 
   String get dialogLocationDescription {
     return Intl.message(
-      'Let Google help apps determine location. This means sending anonymous '
-      'location data to Google, even when no apps are running.',
-      desc: 'Alert dialog description to use location services.',
-      locale: localeName,
+      r'Let Google help apps determine location. This means sending anonymous location data to Google, even when no apps are running.',
+      locale: _localeName,
+      name: 'dialogLocationDescription',
+      desc: r'Alert dialog description to use location services.'
     );
   }
 
   String get dialogCancel {
     return Intl.message(
-      'CANCEL',
-      desc: 'Alert dialog cancel option.',
-      locale: localeName,
+      r'CANCEL',
+      locale: _localeName,
+      name: 'dialogCancel',
+      desc: r'Alert dialog cancel option.'
     );
   }
 
   String get dialogDiscard {
     return Intl.message(
-      'DISCARD',
-      desc: 'Alert dialog discard option.',
-      locale: localeName,
+      r'DISCARD',
+      locale: _localeName,
+      name: 'dialogDiscard',
+      desc: r'Alert dialog discard option.'
     );
   }
 
   String get dialogDisagree {
     return Intl.message(
-      'DISAGREE',
-      desc: 'Alert dialog disagree option.',
-      locale: localeName,
+      r'DISAGREE',
+      locale: _localeName,
+      name: 'dialogDisagree',
+      desc: r'Alert dialog disagree option.'
     );
   }
 
   String get dialogAgree {
     return Intl.message(
-      'AGREE',
-      desc: 'Alert dialog agree option.',
-      locale: localeName,
+      r'AGREE',
+      locale: _localeName,
+      name: 'dialogAgree',
+      desc: r'Alert dialog agree option.'
     );
   }
 
   String get dialogSetBackup {
     return Intl.message(
-      'Set backup account',
-      desc: 'Alert dialog title for setting a backup account.',
-      locale: localeName,
+      r'Set backup account',
+      locale: _localeName,
+      name: 'dialogSetBackup',
+      desc: r'Alert dialog title for setting a backup account.'
     );
   }
 
   String get dialogAddAccount {
     return Intl.message(
-      'Add account',
-      desc: 'Alert dialog option for adding an account.',
-      locale: localeName,
+      r'Add account',
+      locale: _localeName,
+      name: 'dialogAddAccount',
+      desc: r'Alert dialog option for adding an account.'
     );
   }
 
   String get dialogShow {
     return Intl.message(
-      'SHOW DIALOG',
-      desc: 'Button text to display a dialog.',
-      locale: localeName,
+      r'SHOW DIALOG',
+      locale: _localeName,
+      name: 'dialogShow',
+      desc: r'Button text to display a dialog.'
     );
   }
 
   String get dialogFullscreenTitle {
     return Intl.message(
-      'Full Screen Dialog',
-      desc: 'Title for full screen dialog demo.',
-      locale: localeName,
+      r'Full Screen Dialog',
+      locale: _localeName,
+      name: 'dialogFullscreenTitle',
+      desc: r'Title for full screen dialog demo.'
     );
   }
 
   String get dialogFullscreenSave {
     return Intl.message(
-      'SAVE',
-      desc: 'Save button for full screen dialog demo.',
-      locale: localeName,
+      r'SAVE',
+      locale: _localeName,
+      name: 'dialogFullscreenSave',
+      desc: r'Save button for full screen dialog demo.'
     );
   }
 
   String get dialogFullscreenDescription {
     return Intl.message(
-      'A full screen dialog demo',
-      desc: 'Description for full screen dialog demo.',
-      locale: localeName,
+      r'A full screen dialog demo',
+      locale: _localeName,
+      name: 'dialogFullscreenDescription',
+      desc: r'Description for full screen dialog demo.'
     );
   }
 
-  // Cupertino component demo content.
-
   String get cupertinoButtonEnabled {
     return Intl.message(
-      'Enabled',
-      desc: 'Button text for an enabled iOS-style button.',
-      locale: localeName,
+      r'Enabled',
+      locale: _localeName,
+      name: 'cupertinoButtonEnabled',
+      desc: r'Button text for an enabled iOS-style button.'
     );
   }
 
   String get cupertinoButtonDisabled {
     return Intl.message(
-      'Disabled',
-      desc: 'Button text for a disabled iOS-style button.',
-      locale: localeName,
+      r'Disabled',
+      locale: _localeName,
+      name: 'cupertinoButtonDisabled',
+      desc: r'Button text for a disabled iOS-style button.'
     );
   }
 
   String get cupertinoButtonWithBackground {
     return Intl.message(
-      'With Background',
-      desc: 'Button text for a iOS-style button with a filled background.',
-      locale: localeName,
+      r'With Background',
+      locale: _localeName,
+      name: 'cupertinoButtonWithBackground',
+      desc: r'Button text for a iOS-style button with a filled background.'
     );
   }
 
   String get cupertinoAlertCancel {
     return Intl.message(
-      'Cancel',
-      desc: 'iOS-style alert cancel option.',
-      locale: localeName,
+      r'Cancel',
+      locale: _localeName,
+      name: 'cupertinoAlertCancel',
+      desc: r'iOS-style alert cancel option.'
     );
   }
 
   String get cupertinoAlertDiscard {
     return Intl.message(
-      'Discard',
-      desc: 'iOS-style alert discard option.',
-      locale: localeName,
+      r'Discard',
+      locale: _localeName,
+      name: 'cupertinoAlertDiscard',
+      desc: r'iOS-style alert discard option.'
     );
   }
 
   String get cupertinoAlertLocationTitle {
     return Intl.message(
-      'Allow "Maps" to access your location while you are using the app?',
-      desc: 'iOS-style alert title for location permission.',
-      locale: localeName,
+      r'Allow "Maps" to access your location while you are using the app?',
+      locale: _localeName,
+      name: 'cupertinoAlertLocationTitle',
+      desc: r'iOS-style alert title for location permission.'
     );
   }
 
   String get cupertinoAlertLocationDescription {
     return Intl.message(
-      'Your current location will be displayed on the map and used for '
-      'directions, nearby search results, and estimated travel times.',
-      desc: 'iOS-style alert description for location permission.',
-      locale: localeName,
+      r'Your current location will be displayed on the map and used for directions, nearby search results, and estimated travel times.',
+      locale: _localeName,
+      name: 'cupertinoAlertLocationDescription',
+      desc: r'iOS-style alert description for location permission.'
     );
   }
 
   String get cupertinoAlertAllow {
     return Intl.message(
-      'Allow',
-      desc: 'iOS-style alert allow option.',
-      locale: localeName,
+      r'Allow',
+      locale: _localeName,
+      name: 'cupertinoAlertAllow',
+      desc: r'iOS-style alert allow option.'
     );
   }
 
   String get cupertinoAlertDontAllow {
     return Intl.message(
-      'Don\'t Allow',
-      desc: 'iOS-style alert don\'t allow option.',
-      locale: localeName,
+      r'Don' "'" r't Allow',
+      locale: _localeName,
+      name: 'cupertinoAlertDontAllow',
+      desc: r'iOS-style alert don' "'" r't allow option.'
     );
   }
 
   String get cupertinoAlertFavoriteDessert {
     return Intl.message(
-      'Select Favorite Dessert',
-      desc: 'iOS-style alert title for selecting favorite dessert.',
-      locale: localeName,
+      r'Select Favorite Dessert',
+      locale: _localeName,
+      name: 'cupertinoAlertFavoriteDessert',
+      desc: r'iOS-style alert title for selecting favorite dessert.'
     );
   }
 
   String get cupertinoAlertDessertDescription {
     return Intl.message(
-      'Please select your favorite type of dessert from the list below. Your '
-      'selection will be used to customize the suggested list of eateries in '
-      'your area.',
-      desc: 'iOS-style alert description for selecting favorite dessert.',
-      locale: localeName,
+      r'Please select your favorite type of dessert from the list below. Your selection will be used to customize the suggested list of eateries in your area.',
+      locale: _localeName,
+      name: 'cupertinoAlertDessertDescription',
+      desc: r'iOS-style alert description for selecting favorite dessert.'
     );
   }
 
   String get cupertinoAlertCheesecake {
     return Intl.message(
-      'Cheesecake',
-      desc: 'iOS-style alert cheesecake option.',
-      locale: localeName,
+      r'Cheesecake',
+      locale: _localeName,
+      name: 'cupertinoAlertCheesecake',
+      desc: r'iOS-style alert cheesecake option.'
     );
   }
 
   String get cupertinoAlertTiramisu {
     return Intl.message(
-      'Tiramisu',
-      desc: 'iOS-style alert tiramisu option.',
-      locale: localeName,
+      r'Tiramisu',
+      locale: _localeName,
+      name: 'cupertinoAlertTiramisu',
+      desc: r'iOS-style alert tiramisu option.'
     );
   }
 
   String get cupertinoAlertApplePie {
     return Intl.message(
-      'Apple Pie',
-      desc: 'iOS-style alert apple pie option.',
-      locale: localeName,
+      r'Apple Pie',
+      locale: _localeName,
+      name: 'cupertinoAlertApplePie',
+      desc: r'iOS-style alert apple pie option.'
     );
   }
 
   String get cupertinoAlertChocolateBrownie {
     return Intl.message(
-      'Chocolate Brownie',
-      desc: 'iOS-style alert chocolate brownie option.',
-      locale: localeName,
+      r'Chocolate Brownie',
+      locale: _localeName,
+      name: 'cupertinoAlertChocolateBrownie',
+      desc: r'iOS-style alert chocolate brownie option.'
     );
   }
 
   String get cupertinoShowAlert {
     return Intl.message(
-      'Show Alert',
-      desc: 'Button text to show iOS-style alert.',
-      locale: localeName,
+      r'Show Alert',
+      locale: _localeName,
+      name: 'cupertinoShowAlert',
+      desc: r'Button text to show iOS-style alert.'
     );
   }
 
-  // References demo content.
-
   String get colorsRed {
     return Intl.message(
-      'RED',
-      desc: 'Tab title for the color red.',
-      locale: localeName,
+      r'RED',
+      locale: _localeName,
+      name: 'colorsRed',
+      desc: r'Tab title for the color red.'
     );
   }
 
   String get colorsPink {
     return Intl.message(
-      'PINK',
-      desc: 'Tab title for the color pink.',
-      locale: localeName,
+      r'PINK',
+      locale: _localeName,
+      name: 'colorsPink',
+      desc: r'Tab title for the color pink.'
     );
   }
 
   String get colorsPurple {
     return Intl.message(
-      'PURPLE',
-      desc: 'Tab title for the color purple.',
-      locale: localeName,
+      r'PURPLE',
+      locale: _localeName,
+      name: 'colorsPurple',
+      desc: r'Tab title for the color purple.'
     );
   }
 
   String get colorsDeepPurple {
     return Intl.message(
-      'DEEP PURPLE',
-      desc: 'Tab title for the color deep purple.',
-      locale: localeName,
+      r'DEEP PURPLE',
+      locale: _localeName,
+      name: 'colorsDeepPurple',
+      desc: r'Tab title for the color deep purple.'
     );
   }
 
   String get colorsIndigo {
     return Intl.message(
-      'INDIGO',
-      desc: 'Tab title for the color indigo.',
-      locale: localeName,
+      r'INDIGO',
+      locale: _localeName,
+      name: 'colorsIndigo',
+      desc: r'Tab title for the color indigo.'
     );
   }
 
   String get colorsBlue {
     return Intl.message(
-      'BLUE',
-      desc: 'Tab title for the color blue.',
-      locale: localeName,
+      r'BLUE',
+      locale: _localeName,
+      name: 'colorsBlue',
+      desc: r'Tab title for the color blue.'
     );
   }
 
   String get colorsLightBlue {
     return Intl.message(
-      'LIGHT BLUE',
-      desc: 'Tab title for the color light blue.',
-      locale: localeName,
+      r'LIGHT BLUE',
+      locale: _localeName,
+      name: 'colorsLightBlue',
+      desc: r'Tab title for the color light blue.'
     );
   }
 
   String get colorsCyan {
     return Intl.message(
-      'CYAN',
-      desc: 'Tab title for the color cyan.',
-      locale: localeName,
+      r'CYAN',
+      locale: _localeName,
+      name: 'colorsCyan',
+      desc: r'Tab title for the color cyan.'
     );
   }
 
   String get colorsTeal {
     return Intl.message(
-      'TEAL',
-      desc: 'Tab title for the color teal.',
-      locale: localeName,
+      r'TEAL',
+      locale: _localeName,
+      name: 'colorsTeal',
+      desc: r'Tab title for the color teal.'
     );
   }
 
   String get colorsGreen {
     return Intl.message(
-      'GREEN',
-      desc: 'Tab title for the color green.',
-      locale: localeName,
+      r'GREEN',
+      locale: _localeName,
+      name: 'colorsGreen',
+      desc: r'Tab title for the color green.'
     );
   }
 
   String get colorsLightGreen {
     return Intl.message(
-      'LIGHT GREEN',
-      desc: 'Tab title for the color light green.',
-      locale: localeName,
+      r'LIGHT GREEN',
+      locale: _localeName,
+      name: 'colorsLightGreen',
+      desc: r'Tab title for the color light green.'
     );
   }
 
   String get colorsLime {
     return Intl.message(
-      'LIME',
-      desc: 'Tab title for the color lime.',
-      locale: localeName,
+      r'LIME',
+      locale: _localeName,
+      name: 'colorsLime',
+      desc: r'Tab title for the color lime.'
     );
   }
 
   String get colorsYellow {
     return Intl.message(
-      'YELLOW',
-      desc: 'Tab title for the color yellow.',
-      locale: localeName,
+      r'YELLOW',
+      locale: _localeName,
+      name: 'colorsYellow',
+      desc: r'Tab title for the color yellow.'
     );
   }
 
   String get colorsAmber {
     return Intl.message(
-      'AMBER',
-      desc: 'Tab title for the color amber.',
-      locale: localeName,
+      r'AMBER',
+      locale: _localeName,
+      name: 'colorsAmber',
+      desc: r'Tab title for the color amber.'
     );
   }
 
   String get colorsOrange {
     return Intl.message(
-      'ORANGE',
-      desc: 'Tab title for the color orange.',
-      locale: localeName,
+      r'ORANGE',
+      locale: _localeName,
+      name: 'colorsOrange',
+      desc: r'Tab title for the color orange.'
     );
   }
 
   String get colorsDeepOrange {
     return Intl.message(
-      'DEEP ORANGE',
-      desc: 'Tab title for the color deep orange.',
-      locale: localeName,
+      r'DEEP ORANGE',
+      locale: _localeName,
+      name: 'colorsDeepOrange',
+      desc: r'Tab title for the color deep orange.'
     );
   }
 
   String get colorsBrown {
     return Intl.message(
-      'BROWN',
-      desc: 'Tab title for the color brown.',
-      locale: localeName,
+      r'BROWN',
+      locale: _localeName,
+      name: 'colorsBrown',
+      desc: r'Tab title for the color brown.'
     );
   }
 
   String get colorsGrey {
     return Intl.message(
-      'GREY',
-      desc: 'Tab title for the color grey.',
-      locale: localeName,
+      r'GREY',
+      locale: _localeName,
+      name: 'colorsGrey',
+      desc: r'Tab title for the color grey.'
     );
   }
 
   String get colorsBlueGrey {
     return Intl.message(
-      'BLUE GREY',
-      desc: 'Tab title for the color blue grey.',
-      locale: localeName,
+      r'BLUE GREY',
+      locale: _localeName,
+      name: 'colorsBlueGrey',
+      desc: r'Tab title for the color blue grey.'
     );
   }
+
 }
 
-class GalleryLocalizationsDelegate
-    extends LocalizationsDelegate<GalleryLocalizations> {
-  const GalleryLocalizationsDelegate();
+class _GalleryLocalizationsDelegate extends LocalizationsDelegate<GalleryLocalizations> {
+  const _GalleryLocalizationsDelegate();
 
   @override
-  bool isSupported(Locale locale) => supportedLocales.contains(locale);
+  Future<GalleryLocalizations> load(Locale locale) => GalleryLocalizations.load(locale);
 
   @override
-  Future<GalleryLocalizations> load(Locale locale) =>
-      GalleryLocalizations.load(locale);
+  bool isSupported(Locale locale) => <String>['ko', 'es', 'gl', 'en', 'si', 'fi', 'da', 'hu', 'kn', 'ky', 'id', 'is', 'ar', 'ro', 'sk', 'km', 'hr', 'he', 'pt', 'eu', 'fr', 'de', 'et', 'gsw', 'sl', 'pa', 'kk', 'it', 'ml', 'sr', 'uk', 'or', 'cs', 'tl', 'am', 'az', 'mn', 'my', 'nb', 'be', 'ca', 'th', 'zu', 'uz', 'bs', 'lo', 'mk', 'ne', 'fil', 'bg', 'mr', 'lv', 'af', 'ms', 'tr', 'te', 'as', 'lt', 'vi', 'ur', 'ta', 'zh', 'nl', 'bn', 'fa', 'pl', 'sw', 'sv', 'el', 'ja', 'hi', 'ru', 'sq', 'gu', 'ka', 'hy'].contains(locale.languageCode);
 
   @override
-  bool shouldReload(GalleryLocalizationsDelegate old) => false;
+  bool shouldReload(_GalleryLocalizationsDelegate old) => false;
 }

@@ -10,6 +10,12 @@ import 'category_list_item.dart';
 const _horizontalPadding = 32.0;
 const _carouselPadding = 8.0;
 
+const String shrineTitle = 'Shrine';
+const String rallyTitle = 'Rally';
+const String craneTitle = 'Crane';
+const String homeCategoryMaterial = 'MATERIAL';
+const String homeCategoryCupertino = 'CUPERTINO';
+
 class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -24,17 +30,17 @@ class HomePage extends StatelessWidget {
           _Carousel(
             children: [
               _CarouselCard(
-                title: GalleryLocalizations.of(context).shrineTitle,
+                title: shrineTitle,
                 subtitle: GalleryLocalizations.of(context).shrineDescription,
                 study: ShrineApp(),
               ),
               _CarouselCard(
-                title: GalleryLocalizations.of(context).rallyTitle,
+                title: rallyTitle,
                 subtitle: GalleryLocalizations.of(context).rallyDescription,
                 study: RallyApp(),
               ),
               _CarouselCard(
-                title: GalleryLocalizations.of(context).craneTitle,
+                title: craneTitle,
                 subtitle: GalleryLocalizations.of(context).craneDescription,
                 study: CraneApp(),
               ),
@@ -46,12 +52,12 @@ class HomePage extends StatelessWidget {
             GalleryLocalizations.of(context).homeHeaderCategories,
           ),
           CategoryListItem(
-            title: GalleryLocalizations.of(context).homeCategoryMaterial,
+            title: homeCategoryMaterial,
             imageString: 'assets/icons/material/material.png',
             demos: materialDemos(context),
           ),
           CategoryListItem(
-            title: GalleryLocalizations.of(context).homeCategoryCupertino,
+            title: homeCategoryCupertino,
             imageString: 'assets/icons/cupertino/cupertino.png',
             demos: cupertinoDemos(context),
           ),
