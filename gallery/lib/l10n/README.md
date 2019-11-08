@@ -4,9 +4,9 @@ When adding new strings to be localized, update `intl_en_US.arb`, which
 is used by this project as the template. When creating new entries, they
 have to be in the following format:
 ```
-  "${dartGetterVariableName}": "${translation of the message}",
-  "@${dartGetterVariableName}": {
-    "description": "${description that the localizations delegate will use.}"
+  "dartGetterVariableName": "english translation of the message",
+  "@dartGetterVariableName": {
+    "description": "description that the localizations delegate will use."
   },
 ```
 
