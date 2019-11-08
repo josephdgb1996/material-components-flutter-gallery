@@ -18,9 +18,9 @@ available, run the following tool to generate all necessary
 
 ```dart
 dart ${YOUR_FLUTTER_PATH}/dev/tools/localization/gen_l10n.dart \
-  --template-arb-file=intl_en_US.arb \
-  --output-localization-file=localizations_delegate.dart \
-  --output-class=GalleryLocalizations
+    --template-arb-file=intl_en_US.arb \
+    --output-localization-file=localizations_delegate.dart \
+    --output-class=GalleryLocalizations
 ```
 
 This ensures the generated `.dart` files updated with the latest translations.
