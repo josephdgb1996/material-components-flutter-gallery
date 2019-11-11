@@ -3,7 +3,7 @@ import 'dart:io';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
-import 'l10n/localizations_delegate.dart';
+import 'l10n/gallery_localizations.dart';
 import 'pages/backdrop.dart';
 import 'pages/home.dart';
 import 'pages/settings.dart';

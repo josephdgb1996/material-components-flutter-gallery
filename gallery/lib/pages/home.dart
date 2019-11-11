@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../data/demos.dart';
-import '../l10n/localizations_delegate.dart';
+import '../l10n/gallery_localizations.dart';
 import '../studies/crane/app.dart';
 import '../studies/rally/app.dart';
 import '../studies/shrine/app.dart';
