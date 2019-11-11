@@ -1,3 +1,7 @@
+// Copyright 2019 The Flutter team. All rights reserved.
+// Use of this source code is governed by a BSD-style license that can be
+// found in the LICENSE file.
+
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -147,7 +151,9 @@ class _DemoPageState extends State<DemoPage> with TickerProviderStateMixin {
           onConfigChanged: (index) {
             setState(() {
               _configIndex = index;
-              _state = _DemoState.normal;
+              if (!isDesktop) {
+                _state = _DemoState.normal;
+              }
             });
           },
         );

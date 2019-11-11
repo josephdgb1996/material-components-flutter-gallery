@@ -1,14 +1,21 @@
+// Copyright 2019 The Flutter team. All rights reserved.
+// Use of this source code is governed by a BSD-style license that can be
+// found in the LICENSE file.
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-import 'icons.dart';
 import '../demos/cupertino/cupertino_alert_demo.dart';
 import '../demos/cupertino/cupertino_button_demo.dart';
+import '../demos/material/bottom_navigation_demo.dart';
 import '../demos/material/button_demo.dart';
 import '../demos/material/dialog_demo.dart';
+import '../demos/material/text_field_demo.dart';
 import '../demos/reference/colors_demo.dart';
+import '../demos/reference/typography_demo.dart';
 import '../l10n/localizations_delegate.dart';
 import '../themes/material_demo_theme_data.dart';
+import 'icons.dart';
 
 // TODO: Localize all strings.
 
@@ -44,6 +51,37 @@ class GalleryDemoConfiguration {
 
 List<GalleryDemo> materialDemos(BuildContext context) {
   return [
+    GalleryDemo(
+      title: 'Bottom navigation',
+      icon: GalleryIcons.bottomNavigation,
+      subtitle: 'Bottom navigation with cross-fading views',
+      configurations: [
+        GalleryDemoConfiguration(
+          title: 'Bottom navigation with labels',
+          description:
+              'Bottom navigation bars display three to five destinations at the bottom of a screen. '
+              'Each destination is represented by an icon and an optional text label. When a bottom '
+              'navigation icon is tapped, the user is taken to the top-level navigation destination '
+              'associated with that icon.',
+          documentationUrl:
+              'https://api.flutter.dev/flutter/material/BottomNavigationBar-class.html',
+          buildRoute: (context) =>
+              BottomNavigationDemo(type: BottomNavigationDemoType.withLabels),
+        ),
+        GalleryDemoConfiguration(
+          title: 'Bottom navigation with one label',
+          description:
+              'Bottom navigation bars display three to five destinations at the bottom of a screen. '
+              'Each destination is represented by an icon and an optional text label. When a bottom '
+              'navigation icon is tapped, the user is taken to the top-level navigation destination '
+              'associated with that icon.',
+          documentationUrl:
+              'https://api.flutter.dev/flutter/material/BottomNavigationBar-class.html',
+          buildRoute: (context) => BottomNavigationDemo(
+              type: BottomNavigationDemoType.withoutLabels),
+        ),
+      ],
+    ),
     GalleryDemo(
       title: GalleryLocalizations.of(context).demoButtonTitle,
       icon: GalleryIcons.genericButtons,
@@ -129,7 +167,22 @@ List<GalleryDemo> materialDemos(BuildContext context) {
           buildRoute: (context) => DialogDemo(type: DialogDemoType.fullscreen),
         ),
       ],
-    )
+    ),
+    GalleryDemo(
+      title: 'Text fields', // TODO: Localize.
+      icon: GalleryIcons.textFieldsAlt,
+      subtitle: 'Single line of editable text and numbers', // TODO: Localize.
+      configurations: [
+        GalleryDemoConfiguration(
+          title: 'Text fields', // TODO: Localize.
+          description: 'Text fields allow users to enter text into a UI. They '
+              'typically appear in forms and dialogs.', // TODO: Localize.
+          documentationUrl:
+              'https://api.flutter.dev/flutter/material/TextField-class.html',
+          buildRoute: (context) => TextFieldDemo(),
+        ),
+      ],
+    ),
   ];
 }
 
@@ -221,6 +274,22 @@ List<GalleryDemo> referenceDemos(BuildContext context) {
           documentationUrl:
               'https://api.flutter.dev/flutter/material/MaterialColor-class.html',
           buildRoute: (context) => ColorsDemo(),
+        ),
+      ],
+    ),
+    // TODO: Localize.
+    GalleryDemo(
+      title: 'Typography',
+      icon: GalleryIcons.customTypography,
+      subtitle: 'All of the predefined text styles',
+      configurations: [
+        GalleryDemoConfiguration(
+          title: 'Typography',
+          description:
+              'Definitions for the various typographical styles found in material design.',
+          documentationUrl:
+              'https://api.flutter.dev/flutter/material/TextTheme-class.html',
+          buildRoute: (context) => TypographyDemo(),
         ),
       ],
     ),
