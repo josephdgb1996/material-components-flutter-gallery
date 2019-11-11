@@ -18,7 +18,7 @@ name that you will be using in your localizations delegate.
 
 After adding the new message in `intl_en_US.arb`, it can be used in the app by
 regenerating the GalleryLocalizations delegate and the `messages_*.dart` files.
-This allows use of the Englihs message through your localizations delegate in
+This allows use of the English message through your localizations delegate in
 the application code immediately without having to wait for the translations
 to be completed. Run the `gen_l10n.dart` script to do so:
 
