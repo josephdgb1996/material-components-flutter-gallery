@@ -13,7 +13,7 @@ import '../demos/material/dialog_demo.dart';
 import '../demos/material/text_field_demo.dart';
 import '../demos/reference/colors_demo.dart';
 import '../demos/reference/typography_demo.dart';
-import '../l10n/localizations_delegate.dart';
+import '../l10n/gallery_localizations.dart';
 import '../themes/material_demo_theme_data.dart';
 import 'icons.dart';
 
