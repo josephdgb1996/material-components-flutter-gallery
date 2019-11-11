@@ -65,7 +65,7 @@ class GalleryLocalizations {
 
   static Future<GalleryLocalizations> load(Locale locale) {
     return initializeMessages(locale.toString())
-      .then<GalleryLocalizations>((void _) => GalleryLocalizations(locale));
+      .then<GalleryLocalizations>((_) => GalleryLocalizations(locale));
   }
 
   static GalleryLocalizations of(BuildContext context) {
