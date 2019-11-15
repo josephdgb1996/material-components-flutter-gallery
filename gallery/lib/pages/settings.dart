@@ -5,16 +5,14 @@
 import 'dart:collection';
 
 import 'package:flutter/material.dart';
-import 'package:gallery/layout/adaptive.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import '../constants.dart';
 import '../data/gallery_options.dart';
 import '../l10n/gallery_localizations.dart';
+import '../layout/adaptive.dart';
 import 'about.dart' as about;
 import 'settings_list_item.dart';
-
-// TODO: localize
 
 class SettingsPage extends StatelessWidget {
   const SettingsPage({
@@ -101,7 +99,6 @@ class SettingsPage extends StatelessWidget {
               options: options,
               onOptionsChanged: onOptionsChanged,
             ),
-            if (isDisplayDesktop(context)) ...[SizedBox(height: 16)],
             if (!isDisplayDesktop(context)) ...[
               SizedBox(height: 16),
               Divider(thickness: 2, height: 0, color: colorScheme.background),

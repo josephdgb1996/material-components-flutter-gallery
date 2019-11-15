@@ -3,7 +3,6 @@
 // found in the LICENSE file.
 
 import 'package:flutter/material.dart';
-import 'package:gallery/pages/settings.dart';
 
 import '../data/demos.dart';
 import '../l10n/gallery_localizations.dart';
@@ -16,6 +15,7 @@ import '../studies/shrine/app.dart';
 import '../studies/shrine/colors.dart';
 import '../studies/starter/app.dart';
 import 'category_list_item.dart';
+import 'settings.dart';
 
 const _horizontalPadding = 32.0;
 const _carouselPadding = 8.0;
@@ -122,11 +122,11 @@ class HomePage extends StatelessWidget {
                   ],
                 ),
               ),
-              SizedBox(
-                height: 109,
-              ),
               Container(
-                margin: const EdgeInsetsDirectional.only(bottom: 81),
+                margin: const EdgeInsetsDirectional.only(
+                  bottom: 81,
+                  top: 109,
+                ),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: [
@@ -135,7 +135,7 @@ class HomePage extends StatelessWidget {
                     SettingsAttribution(),
                   ],
                 ),
-              )
+              ),
             ],
           ),
         ),
