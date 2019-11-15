@@ -176,18 +176,20 @@ class HomePage extends StatelessWidget {
 
   List<Widget> spaceBetween(double paddingBetween, List<Widget> children) {
     return [
-      for (int index = 0, length = children.length; index < length; index++)
+      for (int index = 0, length = children.length;
+          index < length;
+          index++) ...[
         Flexible(
           child: Container(
             margin: EdgeInsetsDirectional.only(
-              start: (index != 0) ? paddingBetween / 2 : 0,
-              end: (index != length) ? paddingBetween / 2 : 0,
               top: paddingBetween / 2,
               bottom: paddingBetween / 2,
             ),
             child: children[index],
           ),
         ),
+        if (index < children.length - 1) SizedBox(width: paddingBetween),
+      ],
     ];
   }
 
