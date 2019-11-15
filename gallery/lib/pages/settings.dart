@@ -11,6 +11,7 @@ import 'package:url_launcher/url_launcher.dart';
 import '../constants.dart';
 import '../data/gallery_options.dart';
 import '../l10n/gallery_localizations.dart';
+import 'about.dart' as about;
 import 'settings_list_item.dart';
 
 // TODO: localize
@@ -74,20 +75,24 @@ class SettingsPage extends StatelessWidget {
               title: GalleryLocalizations.of(context).settingsPlatformMechanics,
               selectedOption: options.platform,
               options: LinkedHashMap.of({
-                TargetPlatform.android: 'Android',
-                TargetPlatform.iOS: 'iOS',
+                TargetPlatform.android:
+                    GalleryLocalizations.of(context).settingsPlatformAndroid,
+                TargetPlatform.iOS:
+                    GalleryLocalizations.of(context).settingsPlatformIOS,
               }),
               onOptionChanged: (newOption) =>
                   onOptionsChanged(options.copyWith(platform: newOption)),
             ),
             SettingsListItem<ThemeMode>(
-              title: GalleryLocalizations.of(context)
-                  .settingsDarkTheme, // TODO: rename to settingsDarkMode
+              title: GalleryLocalizations.of(context).settingsTheme,
               selectedOption: options.themeMode,
               options: LinkedHashMap.of({
-                ThemeMode.system: 'System',
-                ThemeMode.dark: 'Dark',
-                ThemeMode.light: 'Light',
+                ThemeMode.system:
+                    GalleryLocalizations.of(context).settingsSystemDefault,
+                ThemeMode.dark:
+                    GalleryLocalizations.of(context).settingsDarkTheme,
+                ThemeMode.light:
+                    GalleryLocalizations.of(context).settingsLightTheme,
               }),
               onOptionChanged: (newOption) =>
                   onOptionsChanged(options.copyWith(themeMode: newOption)),
@@ -117,11 +122,12 @@ class SettingsPage extends StatelessWidget {
 class SettingsAbout extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    // TODO: implement build
     return _SettingsLink(
       title: GalleryLocalizations.of(context).settingsAbout,
       icon: Icons.info_outline,
-      onTap: () {}, // TODO: open about page
+      onTap: () {
+        about.showAboutDialog(context: context);
+      },
     );
   }
 }
@@ -158,6 +164,8 @@ class SettingsAttribution extends StatelessWidget {
               fontSize: 12,
               color: Theme.of(context).colorScheme.onSecondary,
             ),
+//          ],
+//        ),
       ),
     );
   }

@@ -6,6 +6,14 @@
 -->
 <resources>
   <string
+    name="aboutFlutterSamplesRepo"
+    description="Represents a link to the Flutter samples github repository."
+    >Flutter samples Github repo</string>
+  <string
+    name="aboutDialogDescription"
+    description="A description about how to view the source code for this app."
+    >To see the source code for this app, please visit the {value}.</string>
+  <string
     name="homeHeaderGallery"
     description="Header title on home screen for Gallery section."
     >Gallery</string>
@@ -102,9 +110,25 @@
     description="Title for platform mechanics (iOS/Android) setting."
     >Platform mechanics</string>
   <string
+    name="settingsPlatformAndroid"
+    description="Title for Android platform setting."
+    >Android</string>
+  <string
+    name="settingsPlatformIOS"
+    description="Title for iOS platform setting."
+    >iOS</string>
+  <string
+    name="settingsTheme"
+    description="Title for the theme setting."
+    >Theme</string>
+  <string
     name="settingsDarkTheme"
-    description="Title for dark theme setting."
-    >Dark theme</string>
+    description="Title for the dark theme setting."
+    >Dark</string>
+  <string
+    name="settingsLightTheme"
+    description="Title for the light theme setting."
+    >Light</string>
   <string
     name="settingsSlowMotion"
     description="Title for slow motion setting."
@@ -121,6 +145,26 @@
     name="settingsAttribution"
     description="Title for attribution (TOASTER is a proper name and should remain in English)."
     >Designed by TOASTER in London</string>
+  <string
+    name="demoBottomNavigationTitle"
+    description="Title for the material bottom navigation component demo."
+    >Bottom navigation</string>
+  <string
+    name="demoBottomNavigationSubtitle"
+    description="Subtitle for the material bottom navigation component demo."
+    >Bottom navigation with cross-fading views</string>
+  <string
+    name="demoBottomNavigationPersistentLabels"
+    description="Option title for bottom navigation with persistent labels."
+    >Persistent labels</string>
+  <string
+    name="demoBottomNavigationSelectedLabel"
+    description="Option title for bottom navigation with only a selected label."
+    >Selected label</string>
+  <string
+    name="demoBottomNavigationDescription"
+    description="Description for the material bottom navigation component demo."
+    >Bottom navigation bars display three to five destinations at the bottom of a screen. Each destination is represented by an icon and an optional text label. When a bottom navigation icon is tapped, the user is taken to the top-level navigation destination associated with that icon.</string>
   <string
     name="demoButtonTitle"
     description="Title for the material buttons component demo."
@@ -264,7 +308,23 @@
   <string
     name="demoColorsDescription"
     description="Description for the colors demo."
-    >Color and color swatch constants which represent Material design&apos;s color palette.</string>
+    >Color and color swatch constants which represent Material Design&apos;s color palette.</string>
+  <string
+    name="demoTypographyTitle"
+    description="Title for the typography demo."
+    >Typography</string>
+  <string
+    name="demoTypographySubtitle"
+    description="Subtitle for the typography demo."
+    >All of the predefined text styles</string>
+  <string
+    name="demoTypographyDescription"
+    description="Description for the typography demo."
+    >Definitions for the various typographical styles found in Material Design.</string>
+  <string
+    name="buttonText"
+    description="Text for a generic button."
+    >BUTTON</string>
   <string
     name="demoBottomSheetTitle"
     description="Title for bottom sheet demo."
@@ -422,13 +482,29 @@
     description="Helper text to indicate that * means that it is a required field."
     >* indicates required field</string>
   <string
-    name="buttonTextEnabled"
-    description="Text for an enabled button."
-    >ENABLED</string>
+    name="bottomNavigationCommentsTab"
+    description="Title for Comments tab of bottom navigation."
+    >Comments</string>
   <string
-    name="buttonTextDisabled"
-    description="Text for a disabled button."
-    >DISABLED</string>
+    name="bottomNavigationCalendarTab"
+    description="Title for Calendar tab of bottom navigation."
+    >Calendar</string>
+  <string
+    name="bottomNavigationAccountTab"
+    description="Title for Account tab of bottom navigation."
+    >Account</string>
+  <string
+    name="bottomNavigationAlarmTab"
+    description="Title for Alarm tab of bottom navigation."
+    >Alarm</string>
+  <string
+    name="bottomNavigationCameraTab"
+    description="Title for Camera tab of bottom navigation."
+    >Camera</string>
+  <string
+    name="bottomNavigationContentPlaceholder"
+    description="Accessibility label for the content placeholder in the bottom navigation demo"
+    >Placeholder for {title} tab</string>
   <string
     name="buttonTextCreate"
     description="Tooltip text for a create button."
@@ -490,13 +566,9 @@
     description="Description for full screen dialog demo."
     >A full screen dialog demo</string>
   <string
-    name="cupertinoButtonEnabled"
-    description="Button text for an enabled iOS-style button."
-    >Enabled</string>
-  <string
-    name="cupertinoButtonDisabled"
-    description="Button text for a disabled iOS-style button."
-    >Disabled</string>
+    name="cupertinoButton"
+    description="Button text for a generic iOS-style button."
+    >Button</string>
   <string
     name="cupertinoButtonWithBackground"
     description="Button text for a iOS-style button with a filled background."

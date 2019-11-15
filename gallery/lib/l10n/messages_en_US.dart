@@ -19,19 +19,37 @@ typedef String MessageIfAbsent(String messageStr, List<dynamic> args);
 class MessageLookup extends MessageLookupByLibrary {
   String get localeName => 'en_US';
 
-  static m1(value) => "Item ${value}";
+  static m1(value) =>
+      "To see the source code for this app, please visit the ${value}.";
 
-  static m2(name, phoneNumber) => "${name} phone number is ${phoneNumber}";
-
-  static m0(value) => "You selected: \"${value}\"";
+  static m2(title) => "Placeholder for ${title} tab";
 
   static m3(value) => "Item ${value}";
 
+  static m4(name, phoneNumber) => "${name} phone number is ${phoneNumber}";
+
+  static m0(value) => "You selected: \"${value}\"";
+
+  static m5(value) => "Item ${value}";
+
   final messages = _notInlinedMessages(_notInlinedMessages);
   static _notInlinedMessages(_) => <String, Function>{
+        "aboutDialogDescription": m1,
+        "aboutFlutterSamplesRepo":
+            MessageLookupByLibrary.simpleMessage("Flutter samples Github repo"),
+        "bottomNavigationAccountTab":
+            MessageLookupByLibrary.simpleMessage("Account"),
+        "bottomNavigationAlarmTab":
+            MessageLookupByLibrary.simpleMessage("Alarm"),
+        "bottomNavigationCalendarTab":
+            MessageLookupByLibrary.simpleMessage("Calendar"),
+        "bottomNavigationCameraTab":
+            MessageLookupByLibrary.simpleMessage("Camera"),
+        "bottomNavigationCommentsTab":
+            MessageLookupByLibrary.simpleMessage("Comments"),
+        "bottomNavigationContentPlaceholder": m2,
+        "buttonText": MessageLookupByLibrary.simpleMessage("BUTTON"),
         "buttonTextCreate": MessageLookupByLibrary.simpleMessage("Create"),
-        "buttonTextDisabled": MessageLookupByLibrary.simpleMessage("DISABLED"),
-        "buttonTextEnabled": MessageLookupByLibrary.simpleMessage("ENABLED"),
         "colorsAmber": MessageLookupByLibrary.simpleMessage("AMBER"),
         "colorsBlue": MessageLookupByLibrary.simpleMessage("BLUE"),
         "colorsBlueGrey": MessageLookupByLibrary.simpleMessage("BLUE GREY"),
@@ -75,10 +93,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "Allow \"Maps\" to access your location while you are using the app?"),
         "cupertinoAlertTiramisu":
             MessageLookupByLibrary.simpleMessage("Tiramisu"),
-        "cupertinoButtonDisabled":
-            MessageLookupByLibrary.simpleMessage("Disabled"),
-        "cupertinoButtonEnabled":
-            MessageLookupByLibrary.simpleMessage("Enabled"),
+        "cupertinoButton": MessageLookupByLibrary.simpleMessage("Button"),
         "cupertinoButtonWithBackground":
             MessageLookupByLibrary.simpleMessage("With Background"),
         "cupertinoShowAlert":
@@ -88,11 +103,21 @@ class MessageLookup extends MessageLookupByLibrary {
         "demoAlertDialogTitle": MessageLookupByLibrary.simpleMessage("Alert"),
         "demoAlertTitleDialogTitle":
             MessageLookupByLibrary.simpleMessage("Alert With Title"),
+        "demoBottomNavigationDescription": MessageLookupByLibrary.simpleMessage(
+            "Bottom navigation bars display three to five destinations at the bottom of a screen. Each destination is represented by an icon and an optional text label. When a bottom navigation icon is tapped, the user is taken to the top-level navigation destination associated with that icon."),
+        "demoBottomNavigationPersistentLabels":
+            MessageLookupByLibrary.simpleMessage("Persistent labels"),
+        "demoBottomNavigationSelectedLabel":
+            MessageLookupByLibrary.simpleMessage("Selected label"),
+        "demoBottomNavigationSubtitle": MessageLookupByLibrary.simpleMessage(
+            "Bottom navigation with cross-fading views"),
+        "demoBottomNavigationTitle":
+            MessageLookupByLibrary.simpleMessage("Bottom navigation"),
         "demoBottomSheetAddLabel": MessageLookupByLibrary.simpleMessage("Add"),
         "demoBottomSheetButtonText":
             MessageLookupByLibrary.simpleMessage("SHOW BOTTOM SHEET"),
         "demoBottomSheetHeader": MessageLookupByLibrary.simpleMessage("Header"),
-        "demoBottomSheetItem": m1,
+        "demoBottomSheetItem": m3,
         "demoBottomSheetModalDescription": MessageLookupByLibrary.simpleMessage(
             "A modal bottom sheet is an alternative to a menu or a dialog and prevents the user from interacting with the rest of the app."),
         "demoBottomSheetModalTitle":
@@ -113,7 +138,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "demoButtonTitle": MessageLookupByLibrary.simpleMessage("Buttons"),
         "demoCodeTooltip": MessageLookupByLibrary.simpleMessage("Code Sample"),
         "demoColorsDescription": MessageLookupByLibrary.simpleMessage(
-            "Color and color swatch constants which represent Material design\'s color palette."),
+            "Color and color swatch constants which represent Material Design\'s color palette."),
         "demoColorsSubtitle": MessageLookupByLibrary.simpleMessage(
             "All of the predefined colors"),
         "demoColorsTitle": MessageLookupByLibrary.simpleMessage("Colors"),
@@ -191,7 +216,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "demoTextFieldLifeStory":
             MessageLookupByLibrary.simpleMessage("Life story"),
         "demoTextFieldNameField": MessageLookupByLibrary.simpleMessage("Name*"),
-        "demoTextFieldNameHasPhoneNumber": m2,
+        "demoTextFieldNameHasPhoneNumber": m4,
         "demoTextFieldNameRequired":
             MessageLookupByLibrary.simpleMessage("Name is required."),
         "demoTextFieldNoMoreThan":
@@ -230,6 +255,12 @@ class MessageLookup extends MessageLookupByLibrary {
             "Toggle buttons can be used to group related options. To emphasize groups of related toggle buttons, a group should share a common container"),
         "demoToggleButtonTitle":
             MessageLookupByLibrary.simpleMessage("Toggle Buttons"),
+        "demoTypographyDescription": MessageLookupByLibrary.simpleMessage(
+            "Definitions for the various typographical styles found in Material Design."),
+        "demoTypographySubtitle": MessageLookupByLibrary.simpleMessage(
+            "All of the predefined text styles"),
+        "demoTypographyTitle":
+            MessageLookupByLibrary.simpleMessage("Typography"),
         "dialogAddAccount": MessageLookupByLibrary.simpleMessage("Add account"),
         "dialogAgree": MessageLookupByLibrary.simpleMessage("AGREE"),
         "dialogCancel": MessageLookupByLibrary.simpleMessage("CANCEL"),
@@ -261,10 +292,14 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("About Flutter Gallery"),
         "settingsAttribution": MessageLookupByLibrary.simpleMessage(
             "Designed by TOASTER in London"),
-        "settingsDarkTheme": MessageLookupByLibrary.simpleMessage("Dark theme"),
+        "settingsDarkTheme": MessageLookupByLibrary.simpleMessage("Dark"),
         "settingsFeedback":
             MessageLookupByLibrary.simpleMessage("Send feedback"),
+        "settingsLightTheme": MessageLookupByLibrary.simpleMessage("Light"),
         "settingsLocale": MessageLookupByLibrary.simpleMessage("Locale"),
+        "settingsPlatformAndroid":
+            MessageLookupByLibrary.simpleMessage("Android"),
+        "settingsPlatformIOS": MessageLookupByLibrary.simpleMessage("iOS"),
         "settingsPlatformMechanics":
             MessageLookupByLibrary.simpleMessage("Platform mechanics"),
         "settingsSlowMotion":
@@ -283,12 +318,13 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Normal"),
         "settingsTextScalingSmall":
             MessageLookupByLibrary.simpleMessage("Small"),
+        "settingsTheme": MessageLookupByLibrary.simpleMessage("Theme"),
         "settingsTitle": MessageLookupByLibrary.simpleMessage("Settings"),
         "shrineDescription":
             MessageLookupByLibrary.simpleMessage("A fashionable retail app"),
         "starterAppDescription":
             MessageLookupByLibrary.simpleMessage("A responsive starter layout"),
-        "starterAppDrawerItem": m3,
+        "starterAppDrawerItem": m5,
         "starterAppGenericBody": MessageLookupByLibrary.simpleMessage("Body"),
         "starterAppGenericButton":
             MessageLookupByLibrary.simpleMessage("BUTTON"),
