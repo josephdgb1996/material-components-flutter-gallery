@@ -3,6 +3,7 @@
 // found in the LICENSE file.
 
 import 'package:flutter/material.dart';
+import 'package:gallery/pages/settings.dart';
 
 import '../data/demos.dart';
 import '../l10n/gallery_localizations.dart';
@@ -76,6 +77,7 @@ class HomePage extends StatelessWidget {
         study: StarterApp(),
       ),
     ];
+
     if (isDisplayDesktop(context)) {
       return Scaffold(
         body: Padding(
@@ -97,7 +99,6 @@ class HomePage extends StatelessWidget {
               settingsHeader(),
               Container(
                 height: 585,
-                margin: const EdgeInsetsDirectional.only(bottom: 214),
                 child: Row(
                   mainAxisSize: MainAxisSize.max,
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -121,6 +122,20 @@ class HomePage extends StatelessWidget {
                   ],
                 ),
               ),
+              SizedBox(
+                height: 109,
+              ),
+              Container(
+                margin: const EdgeInsetsDirectional.only(bottom: 81),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+                    SettingsAbout(),
+                    SettingsFeedback(),
+                    SettingsAttribution(),
+                  ],
+                ),
+              )
             ],
           ),
         ),
