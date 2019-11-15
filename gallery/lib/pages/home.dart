@@ -107,7 +107,7 @@ class HomePage extends StatelessWidget {
               child: Row(
                 mainAxisSize: MainAxisSize.max,
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: spaceBetween(_carouselPadding, carouselCards),
+                children: spaceBetween(_carouselPadding * 2, carouselCards),
               ),
             ),
             SizedBox(height: 32),
@@ -117,7 +117,8 @@ class HomePage extends StatelessWidget {
               child: Row(
                 mainAxisSize: MainAxisSize.max,
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: spaceBetween(_carouselPadding, desktopCategoryItems),
+                children:
+                    spaceBetween(_carouselPadding * 2, desktopCategoryItems),
               ),
             ),
             Container(
@@ -173,21 +174,17 @@ class HomePage extends StatelessWidget {
     }
   }
 
-  List<Widget> spaceBetween(double paddingToEnd, List<Widget> children) {
+  List<Widget> spaceBetween(double paddingBetween, List<Widget> children) {
     return [
       for (int index = 0, length = children.length; index < length; index++)
         Flexible(
           child: Container(
-            margin: (index != length)
-                ? EdgeInsetsDirectional.only(
-                    end: paddingToEnd * 2,
-                    top: paddingToEnd,
-                    bottom: paddingToEnd,
-                  )
-                : EdgeInsetsDirectional.only(
-                    top: paddingToEnd,
-                    bottom: paddingToEnd,
-                  ),
+            margin: EdgeInsetsDirectional.only(
+              start: (index != 0) ? paddingBetween / 2 : 0,
+              end: (index != length) ? paddingBetween / 2 : 0,
+              top: paddingBetween / 2,
+              bottom: paddingBetween / 2,
+            ),
             child: children[index],
           ),
         ),
