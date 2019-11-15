@@ -135,7 +135,6 @@ class SettingsAbout extends StatelessWidget {
 class SettingsFeedback extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    // TODO: implement build
     return _SettingsLink(
       title: GalleryLocalizations.of(context).settingsFeedback,
       icon: Icons.feedback,
@@ -155,7 +154,6 @@ class SettingsFeedback extends StatelessWidget {
 class SettingsAttribution extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    // TODO: implement build
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 28),
       child: Text(
@@ -164,8 +162,6 @@ class SettingsAttribution extends StatelessWidget {
               fontSize: 12,
               color: Theme.of(context).colorScheme.onSecondary,
             ),
-//          ],
-//        ),
       ),
     );
   }
