@@ -78,6 +78,24 @@ class HomePage extends StatelessWidget {
       ),
     ];
 
+    final desktopCategoryItems = <_DesktopCategoryItem>[
+      _DesktopCategoryItem(
+        title: homeCategoryMaterial,
+        imageString: 'assets/icons/material/material.png',
+        demos: materialDemos(context),
+      ),
+      _DesktopCategoryItem(
+        title: homeCategoryCupertino,
+        imageString: 'assets/icons/cupertino/cupertino.png',
+        demos: cupertinoDemos(context),
+      ),
+      _DesktopCategoryItem(
+        title: GalleryLocalizations.of(context).homeCategoryReference,
+        imageString: 'assets/icons/reference/reference.png',
+        demos: referenceDemos(context),
+      ),
+    ];
+
     if (isDisplayDesktop(context)) {
       return Scaffold(
         body: Padding(
@@ -91,7 +109,27 @@ class HomePage extends StatelessWidget {
                   mainAxisSize: MainAxisSize.max,
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    for (final _card in carouselCards) Flexible(child: _card),
+                    for (int index = 0, length = carouselCards.length;
+                        index < length;
+                        index++)
+                      Flexible(
+                        child: Container(
+                          margin: (index == 0)
+                              ? EdgeInsetsDirectional.only(
+                                  end: _carouselPadding,
+                                  top: _carouselPadding,
+                                  bottom: _carouselPadding,
+                                )
+                              : (index == length)
+                                  ? EdgeInsetsDirectional.only(
+                                      start: _carouselPadding,
+                                      top: _carouselPadding,
+                                      bottom: _carouselPadding,
+                                    )
+                                  : EdgeInsets.all(_carouselPadding),
+                          child: carouselCards[index],
+                        ),
+                      ),
                   ],
                 ),
               ),
@@ -103,22 +141,25 @@ class HomePage extends StatelessWidget {
                   mainAxisSize: MainAxisSize.max,
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    _DesktopCategoryItem(
-                      title: homeCategoryMaterial,
-                      imageString: 'assets/icons/material/material.png',
-                      demos: materialDemos(context),
-                    ),
-                    _DesktopCategoryItem(
-                      title: homeCategoryCupertino,
-                      imageString: 'assets/icons/cupertino/cupertino.png',
-                      demos: cupertinoDemos(context),
-                    ),
-                    _DesktopCategoryItem(
-                      title: GalleryLocalizations.of(context)
-                          .homeCategoryReference,
-                      imageString: 'assets/icons/reference/reference.png',
-                      demos: referenceDemos(context),
-                    ),
+                    for (int index = 0, length = desktopCategoryItems.length;
+                        index < length;
+                        index++)
+                      Flexible(
+                        child: Container(
+                          margin: (index == 0)
+                              ? EdgeInsetsDirectional.only(
+                                  end: _carouselPadding,
+                                  top: _carouselPadding,
+                                  bottom: _carouselPadding)
+                              : (index == length)
+                                  ? EdgeInsetsDirectional.only(
+                                      start: _carouselPadding,
+                                      top: _carouselPadding,
+                                      bottom: _carouselPadding)
+                                  : EdgeInsets.all(_carouselPadding),
+                          child: desktopCategoryItems[index],
+                        ),
+                      ),
                   ],
                 ),
               ),
@@ -207,33 +248,28 @@ class _DesktopCategoryItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final colorScheme = Theme.of(context).colorScheme;
-    return Flexible(
-      child: Container(
-        margin: EdgeInsets.all(_carouselPadding),
-        child: Material(
-          borderRadius: BorderRadius.circular(10),
-          color: colorScheme.surface,
-          child: Column(
-            children: [
-              _DesktopCategoryHeader(
-                title: title,
-                imageString: imageString,
-              ),
-              Flexible(
-                child: ListView(
-                  children: [
-                    const SizedBox(height: 27),
-                    for (GalleryDemo demo in demos)
-                      CategoryDemoItem(
-                        demo: demo,
-                      ),
-                    SizedBox(height: 27),
-                  ],
-                ),
-              ),
-            ],
+    return Material(
+      borderRadius: BorderRadius.circular(10),
+      color: colorScheme.surface,
+      child: Column(
+        children: [
+          _DesktopCategoryHeader(
+            title: title,
+            imageString: imageString,
           ),
-        ),
+          Flexible(
+            child: ListView(
+              children: [
+                const SizedBox(height: 27),
+                for (GalleryDemo demo in demos)
+                  CategoryDemoItem(
+                    demo: demo,
+                  ),
+                SizedBox(height: 27),
+              ],
+            ),
+          ),
+        ],
       ),
     );
   }
@@ -386,7 +422,7 @@ class _CarouselCard extends StatelessWidget {
     final textColor = isDark ? Colors.white.withOpacity(0.87) : this.textColor;
 
     return Container(
-      margin: EdgeInsets.all(_carouselPadding),
+//      margin: EdgeInsets.all(_carouselPadding),
       child: Material(
         elevation: 4,
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
