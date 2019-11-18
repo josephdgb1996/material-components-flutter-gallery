@@ -18,9 +18,9 @@ import 'category_list_item.dart';
 import 'settings.dart';
 
 const _horizontalPadding = 32.0;
-const _carouselPadding = 8.0;
+const _itemPadding = 8.0;
 const _horizontalDesktopPadding = 81.0;
-const _carouselHeight = 200.0 + 2 * _carouselPadding;
+const _carouselHeight = 200.0 + 2 * _itemPadding;
 
 const String shrineTitle = 'Shrine';
 const String rallyTitle = 'Rally';
@@ -78,25 +78,25 @@ class HomePage extends StatelessWidget {
       ),
     ];
 
-    final desktopCategoryItems = <_DesktopCategoryItem>[
-      _DesktopCategoryItem(
-        title: homeCategoryMaterial,
-        imageString: 'assets/icons/material/material.png',
-        demos: materialDemos(context),
-      ),
-      _DesktopCategoryItem(
-        title: homeCategoryCupertino,
-        imageString: 'assets/icons/cupertino/cupertino.png',
-        demos: cupertinoDemos(context),
-      ),
-      _DesktopCategoryItem(
-        title: GalleryLocalizations.of(context).homeCategoryReference,
-        imageString: 'assets/icons/reference/reference.png',
-        demos: referenceDemos(context),
-      ),
-    ];
-
     if (isDisplayDesktop(context)) {
+      final desktopCategoryItems = <_DesktopCategoryItem>[
+        _DesktopCategoryItem(
+          title: homeCategoryMaterial,
+          imageString: 'assets/icons/material/material.png',
+          demos: materialDemos(context),
+        ),
+        _DesktopCategoryItem(
+          title: homeCategoryCupertino,
+          imageString: 'assets/icons/cupertino/cupertino.png',
+          demos: cupertinoDemos(context),
+        ),
+        _DesktopCategoryItem(
+          title: GalleryLocalizations.of(context).homeCategoryReference,
+          imageString: 'assets/icons/reference/reference.png',
+          demos: referenceDemos(context),
+        ),
+      ];
+
       return Scaffold(
         body: ListView(
           padding: EdgeInsets.symmetric(horizontal: _horizontalDesktopPadding),
@@ -107,7 +107,7 @@ class HomePage extends StatelessWidget {
               child: Row(
                 mainAxisSize: MainAxisSize.max,
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: spaceBetween(_carouselPadding * 2, carouselCards),
+                children: spaceBetween(_itemPadding * 2, carouselCards),
               ),
             ),
             SizedBox(height: 32),
@@ -117,8 +117,7 @@ class HomePage extends StatelessWidget {
               child: Row(
                 mainAxisSize: MainAxisSize.max,
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children:
-                    spaceBetween(_carouselPadding * 2, desktopCategoryItems),
+                children: spaceBetween(_itemPadding * 2, desktopCategoryItems),
               ),
             ),
             Container(
@@ -314,7 +313,7 @@ class _CarouselState extends State<_Carousel> {
       // The viewPortFraction is calculated as the width of the device minus the
       // padding.
       final width = MediaQuery.of(context).size.width;
-      final padding = (_horizontalPadding * 2) - (_carouselPadding * 2);
+      final padding = (_horizontalPadding * 2) - (_itemPadding * 2);
       _controller = PageController(
         initialPage: _currentPage,
         viewportFraction: (width - padding) / width,
@@ -397,48 +396,43 @@ class _CarouselCard extends StatelessWidget {
     final asset = isDark ? assetDark : this.asset;
     final textColor = isDark ? Colors.white.withOpacity(0.87) : this.textColor;
 
-    return Container(
-      margin: (!isDisplayDesktop(context))
-          ? EdgeInsets.all(_carouselPadding)
-          : EdgeInsets.zero,
-      child: Material(
-        elevation: 4,
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
-        clipBehavior: Clip.antiAlias,
-        child: InkWell(
-          onTap: () {
-            Navigator.of(context).push<void>(
-              MaterialPageRoute(
-                builder: (context) => study,
+    return Material(
+      elevation: 4,
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+      clipBehavior: Clip.antiAlias,
+      child: InkWell(
+        onTap: () {
+          Navigator.of(context).push<void>(
+            MaterialPageRoute(
+              builder: (context) => study,
+            ),
+          );
+        },
+        child: Stack(
+          fit: StackFit.expand,
+          children: [
+            Ink.image(
+              image: AssetImage(asset),
+              fit: BoxFit.cover,
+            ),
+            Positioned(
+              bottom: 16,
+              left: 16,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    title,
+                    style: textTheme.caption.apply(color: textColor),
+                  ),
+                  Text(
+                    subtitle,
+                    style: textTheme.overline.apply(color: textColor),
+                  ),
+                ],
               ),
-            );
-          },
-          child: Stack(
-            fit: StackFit.expand,
-            children: [
-              Ink.image(
-                image: AssetImage(asset),
-                fit: BoxFit.cover,
-              ),
-              Positioned(
-                bottom: 16,
-                left: 16,
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      title,
-                      style: textTheme.caption.apply(color: textColor),
-                    ),
-                    Text(
-                      subtitle,
-                      style: textTheme.overline.apply(color: textColor),
-                    ),
-                  ],
-                ),
-              ),
-            ],
-          ),
+            ),
+          ],
         ),
       ),
     );
