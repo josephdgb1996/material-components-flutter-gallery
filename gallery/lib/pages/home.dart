@@ -175,14 +175,11 @@ class HomePage extends StatelessWidget {
 
   List<Widget> spaceBetween(double paddingBetween, List<Widget> children) {
     return [
-      for (int index = 0, length = children.length;
-          index < length;
-          index++) ...[
+      for (int index = 0; index < children.length; index++) ...[
         Flexible(
           child: Container(
-            margin: EdgeInsetsDirectional.only(
-              top: paddingBetween / 2,
-              bottom: paddingBetween / 2,
+            margin: EdgeInsets.symmetric(
+              vertical: paddingBetween / 2,
             ),
             child: children[index],
           ),
