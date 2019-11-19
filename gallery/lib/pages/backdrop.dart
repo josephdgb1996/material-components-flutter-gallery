@@ -7,6 +7,7 @@ import 'package:flare_flutter/flare.dart';
 import 'package:flare_flutter/flare_actor.dart';
 import 'package:flare_flutter/flare_controller.dart';
 import 'package:flutter/material.dart';
+import 'package:gallery/layout/adaptive.dart';
 
 import '../constants.dart';
 import '../l10n/gallery_localizations.dart';
@@ -90,17 +91,34 @@ class _BackdropState extends State<Backdrop>
 
   Widget _buildStack(BuildContext context, BoxConstraints constraints) {
     final Animation<RelativeRect> animation = _getPanelAnimation(constraints);
-    return Container(
-      child: Stack(
-        children: [
-          widget.frontLayer,
-          PositionedTransition(
-            rect: animation,
-            child: widget.backLayer,
-          ),
-        ],
-      ),
-    );
+    if (isDisplayDesktop(context)) {
+      return Container(
+        child: Stack(
+          children: [
+            widget.backLayer,
+            PositionedTransition(
+              rect: animation,
+              child: SizedBox(
+                width: 520,
+                child: widget.frontLayer,
+              ),
+            ),
+          ],
+        ),
+      );
+    } else {
+      return Container(
+        child: Stack(
+          children: [
+            widget.frontLayer,
+            PositionedTransition(
+              rect: animation,
+              child: widget.backLayer,
+            ),
+          ],
+        ),
+      );
+    }
   }
 
   @override
