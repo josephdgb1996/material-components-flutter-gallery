@@ -113,25 +113,23 @@ class _BackdropState extends State<Backdrop>
                   : Alignment.topLeft,
               scale: CurvedAnimation(
                 parent: _desktopController,
-                curve: Curves.easeInBack,
+                curve: Curves.easeIn,
+                reverseCurve: Curves.easeOut,
               ),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.end,
-                children: [
-                  ClipRRect(
-                    borderRadius: BorderRadius.circular(40),
-                    child: Container(
-                      color: Theme.of(context).colorScheme.secondaryVariant,
-                      padding: EdgeInsets.zero,
-                      constraints: BoxConstraints(
-                        maxHeight: 768,
-                        maxWidth: 520,
-                        minWidth: 520,
-                      ),
-                      child: widget.frontLayer,
+              child: Align(
+                alignment: AlignmentDirectional.topEnd,
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(40),
+                  child: Container(
+                    color: Theme.of(context).colorScheme.secondaryVariant,
+                    constraints: const BoxConstraints(
+                      maxHeight: 768,
+                      maxWidth: desktopSettingsWidth,
+                      minWidth: desktopSettingsWidth,
                     ),
+                    child: widget.frontLayer,
                   ),
-                ],
+                ),
               ),
             ),
           ],

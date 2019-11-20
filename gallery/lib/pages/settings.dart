@@ -5,28 +5,25 @@
 import 'dart:collection';
 
 import 'package:flutter/material.dart';
-import 'package:url_launcher/url_launcher.dart';
-
 import 'package:gallery/constants.dart';
 import 'package:gallery/data/gallery_options.dart';
 import 'package:gallery/l10n/gallery_localizations.dart';
 import 'package:gallery/layout/adaptive.dart';
 import 'package:gallery/pages/about.dart' as about;
+import 'package:gallery/pages/home.dart';
 import 'package:gallery/pages/settings_list_item.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class SettingsPage extends StatelessWidget {
-  const SettingsPage({
-    Key key,
-    this.options,
-    this.onOptionsChanged,
-  }) : super(key: key);
-
-  final GalleryOptions options;
-  final ValueChanged<GalleryOptions> onOptionsChanged;
-
   @override
   Widget build(BuildContext context) {
+    Widget settingsHeader() => Header(
+          color: Theme.of(context).colorScheme.onSurface,
+          text: GalleryLocalizations.of(context).settingsTitle,
+        );
+
     final colorScheme = Theme.of(context).colorScheme;
+    final options = GalleryOptions.of(context);
 
     return Container(
       color: colorScheme.secondaryVariant,
@@ -37,20 +34,15 @@ class SettingsPage extends StatelessWidget {
             Padding(
               padding: EdgeInsetsDirectional.only(
                 start: 32,
-                top: 21,
+                top: (isDisplayDesktop(context)) ? 5 : 21,
                 end: 32,
-                bottom: 27,
+                bottom: (isDisplayDesktop(context)) ? 5 : 27,
               ),
-              child: Text(
-                GalleryLocalizations.of(context).settingsTitle,
-                style: Theme.of(context).textTheme.display1.apply(
-                      color: colorScheme.onSurface,
-                    ),
-              ),
+              child: settingsHeader(),
             ),
             SettingsListItem<double>(
               title: GalleryLocalizations.of(context).settingsTextScaling,
-              selectedOption: options.textScaleFactor,
+              selectedOption: options.textScaleFactor ?? 0,
               options: LinkedHashMap.of({
                 // Using a value of 0 to indicate the system setting.
                 0: GalleryLocalizations.of(context).settingsSystemDefault,
@@ -59,8 +51,9 @@ class SettingsPage extends StatelessWidget {
                 2.0: GalleryLocalizations.of(context).settingsTextScalingLarge,
                 3.0: GalleryLocalizations.of(context).settingsTextScalingHuge
               }),
-              onOptionChanged: (newOption) => onOptionsChanged(
-                options.copyWith(textScaleFactor: newOption),
+              onOptionChanged: (newTextScale) => GalleryOptions.update(
+                context,
+                options.copyWith(textScaleFactor: newTextScale),
               ),
             ),
             SettingsListItem<TextDirection>(
@@ -72,15 +65,19 @@ class SettingsPage extends StatelessWidget {
                 TextDirection.rtl:
                     GalleryLocalizations.of(context).settingsTextDirectionRTL,
               }),
-              onOptionChanged: (newOption) => onOptionsChanged(
-                options.copyWith(textDirection: newOption),
+              onOptionChanged: (newTextDirection) => GalleryOptions.update(
+                context,
+                options.copyWith(textDirection: newTextDirection),
               ),
             ),
             SettingsListItem<Object>(
               title: GalleryLocalizations.of(context).settingsLocale,
               selectedOption: null,
               options: LinkedHashMap.of({}),
-              onOptionChanged: (newOption) => onOptionsChanged(options),
+              onOptionChanged: (newLocale) => GalleryOptions.update(
+                context,
+                options,
+              ),
             ),
             SettingsListItem<TargetPlatform>(
               title: GalleryLocalizations.of(context).settingsPlatformMechanics,
@@ -91,8 +88,10 @@ class SettingsPage extends StatelessWidget {
                 TargetPlatform.iOS:
                     GalleryLocalizations.of(context).settingsPlatformIOS,
               }),
-              onOptionChanged: (newOption) =>
-                  onOptionsChanged(options.copyWith(platform: newOption)),
+              onOptionChanged: (newPlatform) => GalleryOptions.update(
+                context,
+                options.copyWith(platform: newPlatform),
+              ),
             ),
             SettingsListItem<ThemeMode>(
               title: GalleryLocalizations.of(context).settingsTheme,
@@ -105,13 +104,12 @@ class SettingsPage extends StatelessWidget {
                 ThemeMode.light:
                     GalleryLocalizations.of(context).settingsLightTheme,
               }),
-              onOptionChanged: (newOption) =>
-                  onOptionsChanged(options.copyWith(themeMode: newOption)),
+              onOptionChanged: (newThemeMode) => GalleryOptions.update(
+                context,
+                options.copyWith(themeMode: newThemeMode),
+              ),
             ),
-            SlowMotionSetting(
-              options: options,
-              onOptionsChanged: onOptionsChanged,
-            ),
+            SlowMotionSetting(),
             if (!isDisplayDesktop(context)) ...[
               SizedBox(height: 16),
               Divider(thickness: 2, height: 0, color: colorScheme.background),
