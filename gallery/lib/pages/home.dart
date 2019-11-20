@@ -4,19 +4,19 @@
 
 import 'package:flutter/material.dart';
 
-import '../constants.dart';
-import '../data/demos.dart';
-import '../l10n/gallery_localizations.dart';
-import '../layout/adaptive.dart';
-import '../studies/crane/app.dart';
-import '../studies/crane/colors.dart';
-import '../studies/rally/app.dart';
-import '../studies/rally/colors.dart';
-import '../studies/shrine/app.dart';
-import '../studies/shrine/colors.dart';
-import '../studies/starter/app.dart';
-import 'category_list_item.dart';
-import 'settings.dart';
+import 'package:gallery/constants.dart';
+import 'package:gallery/data/demos.dart';
+import 'package:gallery/l10n/gallery_localizations.dart';
+import 'package:gallery/layout/adaptive.dart';
+import 'package:gallery/studies/crane/app.dart';
+import 'package:gallery/studies/crane/colors.dart';
+import 'package:gallery/studies/rally/app.dart';
+import 'package:gallery/studies/rally/colors.dart';
+import 'package:gallery/studies/shrine/app.dart';
+import 'package:gallery/studies/shrine/colors.dart';
+import 'package:gallery/studies/starter/app.dart';
+import 'package:gallery/pages/category_list_item.dart';
+import 'package:gallery/pages/settings.dart';
 
 const _horizontalPadding = 32.0;
 const _carouselItemMargin = 8.0;
@@ -336,10 +336,12 @@ class _CarouselState extends State<_Carousel> {
         // We want the peeking cards to be 160 in height and 0.38 helps
         // achieve that.
         value = (1 - (value.abs() * .38)).clamp(0, 1) as double;
+        value = Curves.easeOut.transform(value);
 
         return Center(
-          child: SizedBox(
-            height: Curves.easeOut.transform(value) * _carouselHeight,
+          child: Transform(
+            transform: Matrix4.diagonal3Values(1.0, value, 1.0),
+            alignment: Alignment.center,
             child: child,
           ),
         );
