@@ -7,8 +7,6 @@ import 'package:flare_flutter/flare.dart';
 import 'package:flare_flutter/flare_actor.dart';
 import 'package:flare_flutter/flare_controller.dart';
 import 'package:flutter/material.dart';
-import 'package:gallery/layout/adaptive.dart';
-
 import 'package:gallery/constants.dart';
 import 'package:gallery/layout/adaptive.dart';
 
