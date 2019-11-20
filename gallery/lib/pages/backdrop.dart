@@ -10,7 +10,7 @@ import 'package:flutter/material.dart';
 import 'package:gallery/layout/adaptive.dart';
 
 import '../constants.dart';
-import '../l10n/gallery_localizations.dart';
+import '../layout/adaptive.dart';
 
 class Backdrop extends StatefulWidget {
   final Widget frontLayer;
@@ -26,8 +26,9 @@ class Backdrop extends StatefulWidget {
 }
 
 class _BackdropState extends State<Backdrop>
-    with SingleTickerProviderStateMixin, FlareController {
+    with TickerProviderStateMixin, FlareController {
   AnimationController _controller;
+  AnimationController _desktopController;
 
   double _speed = 4;
   double _settingsAnimationProgress = 0;
@@ -47,11 +48,14 @@ class _BackdropState extends State<Backdrop>
       ..addListener(() {
         this.setState(() {});
       });
+    _desktopController = AnimationController(
+        duration: Duration(milliseconds: 100), value: 0, vsync: this);
   }
 
   @override
   void dispose() {
     _controller.dispose();
+    _desktopController.dispose();
     super.dispose();
   }
 
@@ -68,6 +72,7 @@ class _BackdropState extends State<Backdrop>
   @override
   bool advance(FlutterActorArtboard artboard, double elapsed) {
     double animateDirection = _isPanelVisible ? -1 : 1;
+
     double targetAnimationProgress =
         _settingsAnimationProgress + animateDirection * elapsed * _speed;
 
@@ -91,83 +96,86 @@ class _BackdropState extends State<Backdrop>
 
   Widget _buildStack(BuildContext context, BoxConstraints constraints) {
     final Animation<RelativeRect> animation = _getPanelAnimation(constraints);
-    if (isDisplayDesktop(context)) {
-      return Container(
-        child: Stack(
-          children: [
-            widget.backLayer,
-            PositionedTransition(
-              rect: animation,
-              child: SizedBox(
-                width: 520,
-                child: widget.frontLayer,
-              ),
-            ),
-          ],
-        ),
-      );
-    } else {
-      return Container(
-        child: Stack(
-          children: [
+
+    return Container(
+      child: Stack(
+        children: [
+          if (!isDisplayDesktop(context)) ...[
             widget.frontLayer,
             PositionedTransition(
               rect: animation,
               child: widget.backLayer,
             ),
           ],
-        ),
-      );
-    }
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    AnimationStatus controllerStatus = _controller.status;
-    final colorScheme = Theme.of(context).colorScheme;
-    return Scaffold(
-      appBar: AppBar(
-        title: Padding(
-          padding: EdgeInsetsDirectional.only(start: 32),
-          child: Text(
-            (controllerStatus != AnimationStatus.completed)
-                ? GalleryLocalizations.of(context).settingsTitle
-                : '',
-            style: Theme.of(context).textTheme.display1.apply(
-                  color: colorScheme.onSurface,
-                ),
-            textAlign: TextAlign.start,
-          ),
-        ),
-        centerTitle: false,
-        titleSpacing: 0,
-        backgroundColor: ((controllerStatus == AnimationStatus.completed)
-            ? colorScheme.background
-            : colorScheme.secondaryVariant),
-        actions: [
-          AspectRatio(
-            aspectRatio: 1,
-            child: GestureDetector(
-              onTap: () {
-                _controller.fling(velocity: _isPanelVisible ? -1 : 1);
-              },
-              child: PhysicalModel(
-                borderRadius: BorderRadius.only(
-                  bottomLeft: Radius.circular(10),
-                ),
-                color: colorScheme.secondaryVariant,
-                child: FlareActor(
-                  'assets/icons/settings/settings.flr',
-                  alignment: Alignment.topRight,
-                  animation: 'Animations',
-                  fit: BoxFit.contain,
-                  controller: this,
+          if (isDisplayDesktop(context)) ...[
+            widget.backLayer,
+            ScaleTransition(
+              alignment: Directionality.of(context) == TextDirection.ltr
+                  ? Alignment.topRight
+                  : Alignment.topLeft,
+              scale: CurvedAnimation(
+                parent: _desktopController,
+                curve: Curves.easeInBack,
+              ),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: [
+                  ClipRRect(
+                    borderRadius: BorderRadius.circular(40),
+                    child: Container(
+                      color: Theme.of(context).colorScheme.secondaryVariant,
+                      padding: EdgeInsets.zero,
+                      constraints: BoxConstraints(
+                        maxHeight: 768,
+                        maxWidth: 520,
+                        minWidth: 520,
+                      ),
+                      child: widget.frontLayer,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ],
+          Align(
+            alignment: AlignmentDirectional.topEnd,
+            child: SafeArea(
+              child: SizedBox(
+                width: 64,
+                height: isDisplayDesktop(context) ? 56 : 40,
+                child: GestureDetector(
+                  onTap: () {
+                    _controller.fling(velocity: _isPanelVisible ? -1 : 1);
+                    _desktopController.fling(
+                        velocity: _isPanelVisible ? -1 : 1);
+                  },
+                  child: Material(
+                    borderRadius: BorderRadiusDirectional.only(
+                      bottomStart: Radius.circular(10),
+                    ),
+                    color: Theme.of(context).colorScheme.secondaryVariant,
+                    child: FlareActor(
+                      'assets/icons/settings/settings.flr',
+                      alignment: Directionality.of(context) == TextDirection.ltr
+                          ? Alignment.bottomLeft
+                          : Alignment.bottomRight,
+                      animation: 'Animations',
+                      fit: BoxFit.contain,
+                      controller: this,
+                    ),
+                  ),
                 ),
               ),
             ),
           ),
         ],
       ),
+    );
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
       body: LayoutBuilder(
         builder: _buildStack,
       ),

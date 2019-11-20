@@ -34,6 +34,20 @@ class SettingsPage extends StatelessWidget {
       child: Center(
         child: ListView(
           children: [
+            Padding(
+              padding: EdgeInsetsDirectional.only(
+                start: 32,
+                top: 21,
+                end: 32,
+                bottom: 27,
+              ),
+              child: Text(
+                GalleryLocalizations.of(context).settingsTitle,
+                style: Theme.of(context).textTheme.display1.apply(
+                      color: colorScheme.onSurface,
+                    ),
+              ),
+            ),
             SettingsListItem<double>(
               title: GalleryLocalizations.of(context).settingsTextScaling,
               selectedOption: options.textScaleFactor,
@@ -159,8 +173,6 @@ class SettingsAttribution extends StatelessWidget {
               fontSize: 12,
               color: Theme.of(context).colorScheme.onSecondary,
             ),
-        overflow: TextOverflow.ellipsis,
-        maxLines: 1,
       ),
     );
   }
@@ -184,20 +196,24 @@ class _SettingsLink extends StatelessWidget {
         padding: EdgeInsets.symmetric(
             horizontal: isDisplayDesktop(context) ? 16 : 32),
         child: Row(
+          mainAxisSize: MainAxisSize.min,
           children: [
             Icon(
               icon,
               color: colorScheme.onSecondary.withOpacity(0.5),
               size: 24,
             ),
-            Padding(
-              padding: const EdgeInsets.symmetric(
-                horizontal: 16,
-                vertical: 12,
-              ),
-              child: Text(
-                title,
-                style: textTheme.subtitle.apply(color: colorScheme.onSecondary),
+            Flexible(
+              child: Padding(
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 16,
+                  vertical: 12,
+                ),
+                child: Text(
+                  title,
+                  style:
+                      textTheme.subtitle.apply(color: colorScheme.onSecondary),
+                ),
               ),
             ),
           ],

@@ -287,6 +287,62 @@ class GalleryLocalizations {
         desc: r'Tooltip text for a create button.');
   }
 
+  String get chipBiking {
+    return Intl.message(r'Biking',
+        locale: _localeName,
+        name: 'chipBiking',
+        desc: r'A chip component to that indicates a biking selection.');
+  }
+
+  String get chipElevator {
+    return Intl.message(r'Elevator',
+        locale: _localeName,
+        name: 'chipElevator',
+        desc: r'A chip component to filter selection by elevators.');
+  }
+
+  String get chipFireplace {
+    return Intl.message(r'Fireplace',
+        locale: _localeName,
+        name: 'chipFireplace',
+        desc: r'A chip component to filter selection by fireplaces.');
+  }
+
+  String get chipLarge {
+    return Intl.message(r'Large',
+        locale: _localeName,
+        name: 'chipLarge',
+        desc: r'A chip component to select a large size.');
+  }
+
+  String get chipMedium {
+    return Intl.message(r'Medium',
+        locale: _localeName,
+        name: 'chipMedium',
+        desc: r'A chip component to select a medium size.');
+  }
+
+  String get chipSmall {
+    return Intl.message(r'Small',
+        locale: _localeName,
+        name: 'chipSmall',
+        desc: r'A chip component to select a small size.');
+  }
+
+  String get chipTurnOnLights {
+    return Intl.message(r'Turn on lights',
+        locale: _localeName,
+        name: 'chipTurnOnLights',
+        desc: r'A chip component to turn on the lights.');
+  }
+
+  String get chipWasher {
+    return Intl.message(r'Washer',
+        locale: _localeName,
+        name: 'chipWasher',
+        desc: r'A chip component to filter selection by washers.');
+  }
+
   String get colorsAmber {
     return Intl.message(r'AMBER',
         locale: _localeName,
@@ -427,6 +483,322 @@ class GalleryLocalizations {
         desc: r'Study description for Crane.');
   }
 
+  String get craneEat {
+    return Intl.message(r'EAT',
+        locale: _localeName, name: 'craneEat', desc: r'Title for EAT tab.');
+  }
+
+  String get craneEat0 {
+    return Intl.message(r'Naples, Italy',
+        locale: _localeName, name: 'craneEat0', desc: r'Label for city.');
+  }
+
+  String get craneEat1 {
+    return Intl.message(r'Dallas, United States',
+        locale: _localeName, name: 'craneEat1', desc: r'Label for city.');
+  }
+
+  String get craneEat10 {
+    return Intl.message(r'Lisbon, Portugal',
+        locale: _localeName, name: 'craneEat10', desc: r'Label for city.');
+  }
+
+  String get craneEat2 {
+    return Intl.message(r'Córdoba, Argentina',
+        locale: _localeName, name: 'craneEat2', desc: r'Label for city.');
+  }
+
+  String get craneEat3 {
+    return Intl.message(r'Portland, United States',
+        locale: _localeName, name: 'craneEat3', desc: r'Label for city.');
+  }
+
+  String get craneEat4 {
+    return Intl.message(r'Paris, France',
+        locale: _localeName, name: 'craneEat4', desc: r'Label for city.');
+  }
+
+  String get craneEat5 {
+    return Intl.message(r'Seoul, South Korea',
+        locale: _localeName, name: 'craneEat5', desc: r'Label for city.');
+  }
+
+  String get craneEat6 {
+    return Intl.message(r'Seattle, United States',
+        locale: _localeName, name: 'craneEat6', desc: r'Label for city.');
+  }
+
+  String get craneEat7 {
+    return Intl.message(r'Nashville, United States',
+        locale: _localeName, name: 'craneEat7', desc: r'Label for city.');
+  }
+
+  String get craneEat8 {
+    return Intl.message(r'Atlanta, United States',
+        locale: _localeName, name: 'craneEat8', desc: r'Label for city.');
+  }
+
+  String get craneEat9 {
+    return Intl.message(r'Madrid, Spain',
+        locale: _localeName, name: 'craneEat9', desc: r'Label for city.');
+  }
+
+  String craneEatRestaurants(Object totalRestaurants) {
+    return Intl.message(r'$totalRestaurants Restaurants',
+        locale: _localeName,
+        name: 'craneEatRestaurants',
+        desc: r'Text indicating the number of restaurants. Always plural.',
+        args: <Object>[totalRestaurants]);
+  }
+
+  String get craneEatSubhead {
+    return Intl.message(r'Explore Restaurants by Destination',
+        locale: _localeName,
+        name: 'craneEatSubhead',
+        desc: r'Subhead for EAT tab.');
+  }
+
+  String get craneFly {
+    return Intl.message(r'FLY',
+        locale: _localeName, name: 'craneFly', desc: r'Title for FLY tab.');
+  }
+
+  String get craneFly0 {
+    return Intl.message(r'Aspen, United States',
+        locale: _localeName, name: 'craneFly0', desc: r'Label for city.');
+  }
+
+  String get craneFly1 {
+    return Intl.message(r'Big Sur, United States',
+        locale: _localeName, name: 'craneFly1', desc: r'Label for city.');
+  }
+
+  String get craneFly10 {
+    return Intl.message(r'Cairo, Egypt',
+        locale: _localeName, name: 'craneFly10', desc: r'Label for city.');
+  }
+
+  String get craneFly11 {
+    return Intl.message(r'Lisbon, Portugal',
+        locale: _localeName, name: 'craneFly11', desc: r'Label for city.');
+  }
+
+  String get craneFly12 {
+    return Intl.message(r'Napa, United States',
+        locale: _localeName, name: 'craneFly12', desc: r'Label for city.');
+  }
+
+  String get craneFly13 {
+    return Intl.message(r'Bali, Indonesia',
+        locale: _localeName, name: 'craneFly13', desc: r'Label for city.');
+  }
+
+  String get craneFly2 {
+    return Intl.message(r'Khumbu Valley, Nepal',
+        locale: _localeName, name: 'craneFly2', desc: r'Label for city.');
+  }
+
+  String get craneFly3 {
+    return Intl.message(r'Machu Picchu, Peru',
+        locale: _localeName, name: 'craneFly3', desc: r'Label for city.');
+  }
+
+  String get craneFly4 {
+    return Intl.message(r'Malé, Maldives',
+        locale: _localeName, name: 'craneFly4', desc: r'Label for city.');
+  }
+
+  String get craneFly5 {
+    return Intl.message(r'Vitznau, Switzerland',
+        locale: _localeName, name: 'craneFly5', desc: r'Label for city.');
+  }
+
+  String get craneFly6 {
+    return Intl.message(r'Madrid, Spain',
+        locale: _localeName, name: 'craneFly6', desc: r'Label for city.');
+  }
+
+  String get craneFly7 {
+    return Intl.message(r'Mount Rushmore, United States',
+        locale: _localeName, name: 'craneFly7', desc: r'Label for city.');
+  }
+
+  String get craneFly8 {
+    return Intl.message(r'Singapore',
+        locale: _localeName, name: 'craneFly8', desc: r'Label for city.');
+  }
+
+  String get craneFly9 {
+    return Intl.message(r'Havana, Cuba',
+        locale: _localeName, name: 'craneFly9', desc: r'Label for city.');
+  }
+
+  String craneFlyMultipleStops(Object numberOfStops) {
+    return Intl.message(r'$numberOfStops stops',
+        locale: _localeName,
+        name: 'craneFlyMultipleStops',
+        desc: r'Label indicating a flight with 2 or more layovers.',
+        args: <Object>[numberOfStops]);
+  }
+
+  String get craneFlyNonstop {
+    return Intl.message(r'Nonstop',
+        locale: _localeName,
+        name: 'craneFlyNonstop',
+        desc: r'Label indicating a nonstop flight.');
+  }
+
+  String get craneFlyOneStop {
+    return Intl.message(r'1 stop',
+        locale: _localeName,
+        name: 'craneFlyOneStop',
+        desc: r'Label indicating a flight with a single layover.');
+  }
+
+  String get craneFlySubhead {
+    return Intl.message(r'Explore Flights by Destination',
+        locale: _localeName,
+        name: 'craneFlySubhead',
+        desc: r'Subhead for FLY tab.');
+  }
+
+  String get craneFormDate {
+    return Intl.message(r'Select Date',
+        locale: _localeName,
+        name: 'craneFormDate',
+        desc: r'Form field label to select a date.');
+  }
+
+  String get craneFormDates {
+    return Intl.message(r'Select Dates',
+        locale: _localeName,
+        name: 'craneFormDates',
+        desc: r'Form field label to select multiple dates.');
+  }
+
+  String get craneFormDestination {
+    return Intl.message(r'Choose Destination',
+        locale: _localeName,
+        name: 'craneFormDestination',
+        desc: r'Form field label to choose a travel destination.');
+  }
+
+  String get craneFormDiners {
+    return Intl.message(r'Diners',
+        locale: _localeName,
+        name: 'craneFormDiners',
+        desc: r'Form field label to enter the number of diners.');
+  }
+
+  String get craneFormLocation {
+    return Intl.message(r'Select Location',
+        locale: _localeName,
+        name: 'craneFormLocation',
+        desc: r'Form field label to select a location.');
+  }
+
+  String get craneFormOrigin {
+    return Intl.message(r'Choose Origin',
+        locale: _localeName,
+        name: 'craneFormOrigin',
+        desc: r'Form field label to choose a travel origin.');
+  }
+
+  String get craneFormTime {
+    return Intl.message(r'Select Time',
+        locale: _localeName,
+        name: 'craneFormTime',
+        desc: r'Form field label to select a time.');
+  }
+
+  String get craneFormTravelers {
+    return Intl.message(r'Travelers',
+        locale: _localeName,
+        name: 'craneFormTravelers',
+        desc: r'Form field label to select the number of travellers.');
+  }
+
+  String get craneSleep {
+    return Intl.message(r'SLEEP',
+        locale: _localeName, name: 'craneSleep', desc: r'Title for SLEEP tab.');
+  }
+
+  String get craneSleep0 {
+    return Intl.message(r'Malé, Maldives',
+        locale: _localeName, name: 'craneSleep0', desc: r'Label for city.');
+  }
+
+  String get craneSleep1 {
+    return Intl.message(r'Aspen, United States',
+        locale: _localeName, name: 'craneSleep1', desc: r'Label for city.');
+  }
+
+  String get craneSleep10 {
+    return Intl.message(r'Cairo, Egypt',
+        locale: _localeName, name: 'craneSleep10', desc: r'Label for city.');
+  }
+
+  String get craneSleep11 {
+    return Intl.message(r'Taipei, Taiwan',
+        locale: _localeName, name: 'craneSleep11', desc: r'Label for city.');
+  }
+
+  String get craneSleep2 {
+    return Intl.message(r'Machu Picchu, Peru',
+        locale: _localeName, name: 'craneSleep2', desc: r'Label for city.');
+  }
+
+  String get craneSleep3 {
+    return Intl.message(r'Havana, Cuba',
+        locale: _localeName, name: 'craneSleep3', desc: r'Label for city.');
+  }
+
+  String get craneSleep4 {
+    return Intl.message(r'Vitznau, Switzerland',
+        locale: _localeName, name: 'craneSleep4', desc: r'Label for city.');
+  }
+
+  String get craneSleep5 {
+    return Intl.message(r'Big Sur, United States',
+        locale: _localeName, name: 'craneSleep5', desc: r'Label for city.');
+  }
+
+  String get craneSleep6 {
+    return Intl.message(r'Napa, United States',
+        locale: _localeName, name: 'craneSleep6', desc: r'Label for city.');
+  }
+
+  String get craneSleep7 {
+    return Intl.message(r'Porto, Portugal',
+        locale: _localeName, name: 'craneSleep7', desc: r'Label for city.');
+  }
+
+  String get craneSleep8 {
+    return Intl.message(r'Tulum, Mexico',
+        locale: _localeName, name: 'craneSleep8', desc: r'Label for city.');
+  }
+
+  String get craneSleep9 {
+    return Intl.message(r'Lisbon, Portugal',
+        locale: _localeName, name: 'craneSleep9', desc: r'Label for city.');
+  }
+
+  String craneSleepProperties(Object totalProperties) {
+    return Intl.message(r'$totalProperties Available Properties',
+        locale: _localeName,
+        name: 'craneSleepProperties',
+        desc:
+            r'Text indicating the number of available properties (temporary rentals). Always plural',
+        args: <Object>[totalProperties]);
+  }
+
+  String get craneSleepSubhead {
+    return Intl.message(r'Explore Properties by Destination',
+        locale: _localeName,
+        name: 'craneSleepSubhead',
+        desc: r'Subhead for SLEEP tab.');
+  }
+
   String get cupertinoAlertAllow {
     return Intl.message(r'Allow',
         locale: _localeName,
@@ -533,6 +905,21 @@ class GalleryLocalizations {
         locale: _localeName,
         name: 'cupertinoShowAlert',
         desc: r'Button text to show iOS-style alert.');
+  }
+
+  String get demoActionChipDescription {
+    return Intl.message(
+        r'Action chips are a set of options which trigger an action related to primary content. Action chips should appear dynamically and contextually in a UI.',
+        locale: _localeName,
+        name: 'demoActionChipDescription',
+        desc: r'Description for the action chip component demo.');
+  }
+
+  String get demoActionChipTitle {
+    return Intl.message(r'Action Chip',
+        locale: _localeName,
+        name: 'demoActionChipTitle',
+        desc: r'Title for the action chip component demo.');
   }
 
   String get demoAlertDialogDescription {
@@ -689,6 +1076,36 @@ class GalleryLocalizations {
         desc: r'Title for the material buttons component demo.');
   }
 
+  String get demoChipSubtitle {
+    return Intl.message(
+        r'Compact elements that represent an input, attribute, or action',
+        locale: _localeName,
+        name: 'demoChipSubtitle',
+        desc: r'Subtitle for the material chips component demo.');
+  }
+
+  String get demoChipTitle {
+    return Intl.message(r'Chips',
+        locale: _localeName,
+        name: 'demoChipTitle',
+        desc: r'Title for the material chips component demo.');
+  }
+
+  String get demoChoiceChipDescription {
+    return Intl.message(
+        r'Choice chips represent a single choice from a set. Choice chips contain related descriptive text or categories.',
+        locale: _localeName,
+        name: 'demoChoiceChipDescription',
+        desc: r'Description for the choice chip component demo.');
+  }
+
+  String get demoChoiceChipTitle {
+    return Intl.message(r'Choice Chip',
+        locale: _localeName,
+        name: 'demoChoiceChipTitle',
+        desc: r'Title for the choice chip component demo.');
+  }
+
   String get demoCodeTooltip {
     return Intl.message(r'Code Sample',
         locale: _localeName,
@@ -703,7 +1120,8 @@ class GalleryLocalizations {
         r's color palette.',
         locale: _localeName,
         name: 'demoColorsDescription',
-        desc: r'Description for the colors demo.');
+        desc:
+            r'Description for the colors demo. Material Design should remain capitalized.');
   }
 
   String get demoColorsSubtitle {
@@ -818,7 +1236,7 @@ class GalleryLocalizations {
     return Intl.message(r'Dialogs',
         locale: _localeName,
         name: 'demoDialogTitle',
-        desc: r'Title for the material buttons component demo.');
+        desc: r'Title for the material dialog component demo.');
   }
 
   String get demoDocumentationTooltip {
@@ -826,6 +1244,21 @@ class GalleryLocalizations {
         locale: _localeName,
         name: 'demoDocumentationTooltip',
         desc: r'Tooltip for API documentation button in a demo.');
+  }
+
+  String get demoFilterChipDescription {
+    return Intl.message(
+        r'Filter chips use tags or descriptive words as a way to filter content.',
+        locale: _localeName,
+        name: 'demoFilterChipDescription',
+        desc: r'Description for the filter chip component demo.');
+  }
+
+  String get demoFilterChipTitle {
+    return Intl.message(r'Filter Chip',
+        locale: _localeName,
+        name: 'demoFilterChipTitle',
+        desc: r'Title for the filter chip component demo.');
   }
 
   String get demoFlatButtonDescription {
@@ -885,6 +1318,21 @@ class GalleryLocalizations {
         locale: _localeName,
         name: 'demoInfoTooltip',
         desc: r'Tooltip for info button in a demo.');
+  }
+
+  String get demoInputChipDescription {
+    return Intl.message(
+        r'Input chips represent a complex piece of information, such as an entity (person, place, or thing) or conversational text, in a compact form.',
+        locale: _localeName,
+        name: 'demoInputChipDescription',
+        desc: r'Description for the input chip component demo.');
+  }
+
+  String get demoInputChipTitle {
+    return Intl.message(r'Input Chip',
+        locale: _localeName,
+        name: 'demoInputChipTitle',
+        desc: r'Title for the input chip component demo.');
   }
 
   String get demoInvalidURL {
@@ -1173,7 +1621,8 @@ class GalleryLocalizations {
         r'Definitions for the various typographical styles found in Material Design.',
         locale: _localeName,
         name: 'demoTypographyDescription',
-        desc: r'Description for the typography demo.');
+        desc:
+            r'Description for the typography demo. Material Design should remain capitalized.');
   }
 
   String get demoTypographySubtitle {
