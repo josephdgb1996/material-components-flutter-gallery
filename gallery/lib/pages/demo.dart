@@ -35,7 +35,7 @@ class DemoPage extends StatefulWidget {
 class _DemoPageState extends State<DemoPage> with TickerProviderStateMixin {
   _DemoState _state = _DemoState.normal;
   int _configIndex = 0;
-  bool isDesktop = null;
+  bool isDesktop;
 
   GalleryDemoConfiguration get _currentConfig {
     return widget.demo.configurations[_configIndex];
