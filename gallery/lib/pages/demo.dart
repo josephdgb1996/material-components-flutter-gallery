@@ -35,7 +35,7 @@ class DemoPage extends StatefulWidget {
 class _DemoPageState extends State<DemoPage> with TickerProviderStateMixin {
   _DemoState _state = _DemoState.normal;
   int _configIndex = 0;
-  bool isDesktop;
+  bool _isDesktop;
 
   GalleryDemoConfiguration get _currentConfig {
     return widget.demo.configurations[_configIndex];
@@ -52,8 +52,8 @@ class _DemoPageState extends State<DemoPage> with TickerProviderStateMixin {
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
-    if (isDesktop == null) {
-      isDesktop = isDisplayDesktop(context);
+    if (_isDesktop == null) {
+      _isDesktop = isDisplayDesktop(context);
     }
   }
 
@@ -107,8 +107,8 @@ class _DemoPageState extends State<DemoPage> with TickerProviderStateMixin {
     } else if (_state == _DemoState.normal && isDesktop) {
       // Do not allow normal state for desktop.
       _state = _DemoState.info;
-    } else if (isDesktop != this.isDesktop) {
-      this.isDesktop = isDesktop;
+    } else if (isDesktop != this._isDesktop) {
+      this._isDesktop = isDesktop;
       // When going from desktop to mobile, return to normal state.
       if (!isDesktop) {
         _state = _DemoState.normal;
