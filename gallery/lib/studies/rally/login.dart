@@ -21,16 +21,6 @@ class _LoginPageState extends State<LoginPage> {
   Widget build(BuildContext context) {
     return ApplyTextOptions(
       child: Scaffold(
-        appBar: AppBar(
-          elevation: 0,
-          leading: IconButton(
-            icon: const BackButtonIcon(),
-            tooltip: MaterialLocalizations.of(context).backButtonTooltip,
-            onPressed: () {
-              Navigator.of(context, rootNavigator: true).pop();
-            },
-          ),
-        ),
         body: SafeArea(
           child: _MainView(
             usernameController: _usernameController,
@@ -131,36 +121,40 @@ class _TopBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final spacing = const SizedBox(width: 30);
-    return Row(
-      crossAxisAlignment: CrossAxisAlignment.center,
-      children: [
-        spacing,
-        ExcludeSemantics(
-          child: SizedBox(
-            height: 80,
-            child: Image.asset(
-              'logo.png',
-              package: 'rally_assets',
+    return Padding(
+      padding: const EdgeInsets.only(top: 8),
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          spacing,
+          ExcludeSemantics(
+            child: SizedBox(
+              height: 80,
+              child: Image.asset(
+                'logo.png',
+                package: 'rally_assets',
+              ),
             ),
           ),
-        ),
-        spacing,
-        Text(
-          GalleryLocalizations.of(context).rallyLoginLoginToRally,
-          style: Theme.of(context).textTheme.body2.copyWith(
-                fontSize: 35,
-                fontWeight: FontWeight.w600,
-              ),
-        ),
-        const Expanded(child: SizedBox.shrink()),
-        Text(
-          GalleryLocalizations.of(context).rallyLoginNoAccount,
-          style: Theme.of(context).textTheme.subhead,
-        ),
-        spacing,
-        _BorderButton(text: GalleryLocalizations.of(context).rallyLoginSignUp),
-        spacing,
-      ],
+          spacing,
+          Text(
+            GalleryLocalizations.of(context).rallyLoginLoginToRally,
+            style: Theme.of(context).textTheme.body2.copyWith(
+                  fontSize: 35,
+                  fontWeight: FontWeight.w600,
+                ),
+          ),
+          const Expanded(child: SizedBox.shrink()),
+          Text(
+            GalleryLocalizations.of(context).rallyLoginNoAccount,
+            style: Theme.of(context).textTheme.subhead,
+          ),
+          spacing,
+          _BorderButton(
+              text: GalleryLocalizations.of(context).rallyLoginSignUp),
+          spacing,
+        ],
+      ),
     );
   }
 }

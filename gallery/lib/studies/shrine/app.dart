@@ -92,12 +92,16 @@ class _ShrineAppState extends State<ShrineApp> with TickerProviderStateMixin {
       child: MaterialApp(
         title: 'Shrine',
         debugShowCheckedModeBanner: false,
-        home: HomePage(
-          backdrop: backdrop,
-          scrim: Scrim(controller: _expandingController),
-          expandingBottomSheet: ExpandingBottomSheet(
-            hideController: _controller,
-            expandingController: _expandingController,
+        home: MediaQuery.removePadding(
+          context: context,
+          removeTop: true,
+          child: HomePage(
+            backdrop: backdrop,
+            scrim: Scrim(controller: _expandingController),
+            expandingBottomSheet: ExpandingBottomSheet(
+              hideController: _controller,
+              expandingController: _expandingController,
+            ),
           ),
         ),
         initialRoute: '/login',

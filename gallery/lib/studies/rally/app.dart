@@ -25,7 +25,11 @@ class RallyApp extends StatelessWidget {
       localizationsDelegates: GalleryLocalizations.localizationsDelegates,
       supportedLocales: GalleryLocalizations.supportedLocales,
       locale: GalleryOptions.of(context).locale,
-      home: HomePage(),
+      home: MediaQuery.removePadding(
+        context: context,
+        removeTop: true,
+        child: HomePage(),
+      ),
       initialRoute: '/login',
       routes: <String, WidgetBuilder>{
         '/login': (context) => LoginPage(),

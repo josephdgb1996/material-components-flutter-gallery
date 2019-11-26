@@ -135,7 +135,7 @@ class _BackdropState extends State<Backdrop> with TickerProviderStateMixin {
     return Material(
       color: cranePurple800,
       child: Padding(
-        padding: isDesktop ? EdgeInsets.only(top: 12) : EdgeInsets.zero,
+        padding: EdgeInsets.only(top: 12),
         child: Scaffold(
           backgroundColor: cranePurple800,
           appBar: AppBar(

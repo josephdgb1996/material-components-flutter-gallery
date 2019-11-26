@@ -43,16 +43,20 @@ class _CraneAppState extends State<CraneApp> {
       darkTheme: craneTheme.copyWith(
         platform: GalleryOptions.of(context).platform,
       ),
-      home: ApplyTextOptions(
-        child: Backdrop(
-          frontLayer: Container(),
-          backLayer: [
-            FlyForm(),
-            SleepForm(),
-            EatForm(),
-          ],
-          frontTitle: Text('CRANE'),
-          backTitle: Text('MENU'),
+      home: MediaQuery.removePadding(
+        context: context,
+        removeTop: true,
+        child: ApplyTextOptions(
+          child: Backdrop(
+            frontLayer: Container(),
+            backLayer: [
+              FlyForm(),
+              SleepForm(),
+              EatForm(),
+            ],
+            frontTitle: Text('CRANE'),
+            backTitle: Text('MENU'),
+          ),
         ),
       ),
     );

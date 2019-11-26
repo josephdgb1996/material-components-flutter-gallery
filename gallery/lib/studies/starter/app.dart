@@ -18,8 +18,12 @@ class StarterApp extends StatelessWidget {
       localizationsDelegates: GalleryLocalizations.localizationsDelegates,
       supportedLocales: GalleryLocalizations.supportedLocales,
       locale: GalleryOptions.of(context).locale,
-      home: ApplyTextOptions(
-        child: HomePage(),
+      home: MediaQuery.removePadding(
+        context: context,
+        removeTop: true,
+        child: ApplyTextOptions(
+          child: HomePage(),
+        ),
       ),
       theme: ThemeData(
         primaryColor: _primaryColor,

@@ -646,7 +646,7 @@ class _CarouselCard extends StatelessWidget {
           onTap: () {
             Navigator.of(context).push<void>(
               MaterialPageRoute(
-                builder: (context) => study,
+                builder: (context) => _StudyWrapper(study: study),
               ),
             );
           },
@@ -691,3 +691,19 @@ double _carouselHeight(double scaleFactor, BuildContext context) => math.max(
         GalleryOptions.of(context).textScaleFactor(context) *
         scaleFactor,
     _carouselHeightMin);
+
+/// Wrap the studies with this to display a back button and allow the user to
+/// exit them at any time.
+class _StudyWrapper extends StatelessWidget {
+  const _StudyWrapper({Key key, this.study}) : super(key: key);
+
+  final Widget study;
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(),
+      body: study,
+    );
+  }
+}
