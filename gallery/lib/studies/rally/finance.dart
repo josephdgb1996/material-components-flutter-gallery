@@ -307,26 +307,30 @@ class FinancialEntityCategoryDetailsPage extends StatelessWidget {
       );
     }).toList();
 
-    return Scaffold(
-      appBar: AppBar(
-        elevation: 0,
-        centerTitle: true,
-        title: Text(
-          GalleryLocalizations.of(context).rallyAccountDataChecking,
-          style: Theme.of(context).textTheme.body1.copyWith(fontSize: 18),
+    return MediaQuery.removePadding(
+      context: context,
+      removeTop: true,
+      child: Scaffold(
+        appBar: AppBar(
+          elevation: 0,
+          centerTitle: true,
+          title: Text(
+            GalleryLocalizations.of(context).rallyAccountDataChecking,
+            style: Theme.of(context).textTheme.body1.copyWith(fontSize: 18),
+          ),
         ),
-      ),
-      body: Column(
-        children: [
-          SizedBox(
-            height: 200,
-            width: double.infinity,
-            child: RallyLineChart(events: items),
-          ),
-          Flexible(
-            child: ListView(shrinkWrap: true, children: cards),
-          ),
-        ],
+        body: Column(
+          children: [
+            SizedBox(
+              height: 200,
+              width: double.infinity,
+              child: RallyLineChart(events: items),
+            ),
+            Flexible(
+              child: ListView(shrinkWrap: true, children: cards),
+            ),
+          ],
+        ),
       ),
     );
   }
