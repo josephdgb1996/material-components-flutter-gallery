@@ -15,6 +15,7 @@ import 'package:gallery/l10n/gallery_localizations.dart';
 import 'package:gallery/layout/adaptive.dart';
 import 'package:gallery/pages/category_list_item.dart';
 import 'package:gallery/pages/settings.dart';
+import 'package:gallery/pages/splash.dart';
 import 'package:gallery/studies/crane/app.dart';
 import 'package:gallery/studies/crane/colors.dart';
 import 'package:gallery/studies/rally/app.dart';
@@ -38,9 +39,7 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var carouselHeight = _carouselHeight(.7, context);
-
-    FocusNode _topFocusNode = FocusNode();
-    FocusNode _endFocusNode = FocusNode();
+    final isDesktop = isDisplayDesktop(context);
 
     final carouselCards = <_CarouselCard>[
       _CarouselCard(
@@ -77,7 +76,7 @@ class HomePage extends StatelessWidget {
       ),
     ];
 
-    if (isDisplayDesktop(context)) {
+    if (isDesktop) {
       final desktopCategoryItems = <_DesktopCategoryItem>[
         _DesktopCategoryItem(
           title: homeCategoryMaterial,
@@ -100,13 +99,11 @@ class HomePage extends StatelessWidget {
         body: ListView(
           padding: EdgeInsetsDirectional.only(
             start: _horizontalDesktopPadding,
-            top: (isDisplayDesktop(context)) ? 5 : 21,
+            top: isDesktop ? firstHeaderDesktopTopPadding : 21,
             end: _horizontalDesktopPadding,
           ),
           children: [
-            SizedBox(height: 5),
             ExcludeSemantics(child: _GalleryHeader()),
-            SizedBox(height: 11),
             Container(
               height: carouselHeight,
               child: Row(
@@ -147,6 +144,8 @@ class HomePage extends StatelessWidget {
     } else {
       return Scaffold(
         body: _AnimatedHomePage(
+          isSplashPageAnimationFinished:
+              SplashPageAnimation.of(context).isFinished,
           carouselCards: carouselCards,
         ),
       );
@@ -195,7 +194,7 @@ class Header extends StatelessWidget {
   Widget build(BuildContext context) {
     return Padding(
       padding: EdgeInsets.only(
-        top: isDisplayDesktop(context) ? 63 : 29,
+        top: isDisplayDesktop(context) ? 63 : 15,
         bottom: isDisplayDesktop(context) ? 21 : 11,
       ),
       child: InkWell(
@@ -216,9 +215,14 @@ class Header extends StatelessWidget {
 }
 
 class _AnimatedHomePage extends StatefulWidget {
-  const _AnimatedHomePage({Key key, this.carouselCards}) : super(key: key);
+  const _AnimatedHomePage({
+    Key key,
+    @required this.carouselCards,
+    @required this.isSplashPageAnimationFinished,
+  }) : super(key: key);
 
   final List<Widget> carouselCards;
+  final bool isSplashPageAnimationFinished;
 
   @override
   _AnimatedHomePageState createState() => _AnimatedHomePageState();
@@ -236,14 +240,25 @@ class _AnimatedHomePageState extends State<_AnimatedHomePage>
       vsync: this,
       duration: Duration(milliseconds: 800),
     );
-    // Wait for the splash page animation to be finished.
-    _launchTimer = Timer(
+
+    if (widget.isSplashPageAnimationFinished) {
+      // To avoid the animation from running when changing the window size from
+      // desktop to mobile, we do not animate our widget if the
+      // splash page animation is finished on initState.
+      _animationController.value = 1.0;
+    } else {
+      // Wait for the splash page animation to be finished before
+      // starting ours.
+      _launchTimer = Timer(
         const Duration(
           seconds: launchTimerDurationInSeconds,
           milliseconds: splashPageAnimationDurationInMilliseconds,
-        ), () {
-      _animationController.forward();
-    });
+        ),
+        () {
+          _animationController.forward();
+        },
+      );
+    }
   }
 
   @override
@@ -337,7 +352,10 @@ class _DesktopCategoryItem extends StatelessWidget {
                 color: colorScheme.background,
               ),
               Flexible(
-                child: Focus(
+                // Remove ListView top padding as it is already accounted for.
+                child: MediaQuery.removePadding(
+                  removeTop: true,
+                  context: context,
                   child: ListView(
                     children: [
                       const SizedBox(height: 12),
@@ -662,7 +680,10 @@ class _CarouselCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final textTheme = Theme.of(context).textTheme;
-    final isDark = Theme.of(context).colorScheme.brightness == Brightness.dark;
+    // TODO: Update with newer assets when we have them. For now, always use the
+    //  dark assets.
+    // Theme.of(context).colorScheme.brightness == Brightness.dark;
+    final isDark = true;
     final asset = isDark ? assetDark : this.asset;
     final textColor = isDark ? Colors.white.withOpacity(0.87) : this.textColor;
 
