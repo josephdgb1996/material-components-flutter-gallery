@@ -219,9 +219,7 @@ class _BackdropState extends State<Backdrop>
                 height: isDesktop
                     ? settingsButtonHeightDesktop
                     : settingsButtonHeightMobile + safeAreaTopPadding,
-                child: InkWell(
-                  focusColor: Colors.pink,
-                  canRequestFocus: false,
+                child: GestureDetector(
                   onTap: toggleSettings,
                   child: Material(
                     borderRadius: BorderRadiusDirectional.only(

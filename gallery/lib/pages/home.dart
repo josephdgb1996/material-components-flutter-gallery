@@ -197,18 +197,13 @@ class Header extends StatelessWidget {
         top: isDisplayDesktop(context) ? 63 : 15,
         bottom: isDisplayDesktop(context) ? 21 : 11,
       ),
-      child: InkWell(
-        focusColor: Colors.pink,
-        onTap: () {},
-        splashColor: Colors.transparent,
-        child: Text(
-          text,
-          style: Theme.of(context).textTheme.display1.apply(
-                color: color,
-                fontSizeDelta:
-                    isDisplayDesktop(context) ? desktopDisplay1FontDelta : 0,
-              ),
-        ),
+      child: Text(
+        text,
+        style: Theme.of(context).textTheme.display1.apply(
+              color: color,
+              fontSizeDelta:
+                  isDisplayDesktop(context) ? desktopDisplay1FontDelta : 0,
+            ),
       ),
     );
   }
@@ -353,18 +348,20 @@ class _DesktopCategoryItem extends StatelessWidget {
               ),
               Flexible(
                 // Remove ListView top padding as it is already accounted for.
-                child: MediaQuery.removePadding(
-                  removeTop: true,
-                  context: context,
-                  child: ListView(
-                    children: [
-                      const SizedBox(height: 12),
-                      for (GalleryDemo demo in demos)
-                        CategoryDemoItem(
-                          demo: demo,
-                        ),
-                      SizedBox(height: 12),
-                    ],
+                child: Focus(
+                  child: MediaQuery.removePadding(
+                    removeTop: true,
+                    context: context,
+                    child: ListView(
+                      children: [
+                        const SizedBox(height: 12),
+                        for (GalleryDemo demo in demos)
+                          CategoryDemoItem(
+                            demo: demo,
+                          ),
+                        SizedBox(height: 12),
+                      ],
+                    ),
                   ),
                 ),
               ),
