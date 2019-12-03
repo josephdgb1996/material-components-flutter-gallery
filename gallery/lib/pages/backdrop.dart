@@ -222,7 +222,9 @@ class _BackdropState extends State<Backdrop>
                     height: isDisplayDesktop(context)
                         ? desktopHeight
                         : mobileHeight,
-                    child: GestureDetector(
+                    child: InkWell(
+                      focusColor: Colors.pink,
+                      canRequestFocus: false,
                       onTap: () {
                         _mobileController.fling(
                             velocity: _isPanelVisible ? -1 : 1);

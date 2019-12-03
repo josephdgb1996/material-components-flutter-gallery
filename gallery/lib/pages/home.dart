@@ -39,6 +39,9 @@ class HomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     var carouselHeight = _carouselHeight(.7, context);
 
+    FocusNode _topFocusNode = FocusNode();
+    FocusNode _endFocusNode = FocusNode();
+
     final carouselCards = <_CarouselCard>[
       _CarouselCard(
         title: shrineTitle,
@@ -195,13 +198,18 @@ class Header extends StatelessWidget {
         top: isDisplayDesktop(context) ? 63 : 29,
         bottom: isDisplayDesktop(context) ? 21 : 11,
       ),
-      child: Text(
-        text,
-        style: Theme.of(context).textTheme.display1.apply(
-              color: color,
-              fontSizeDelta:
-                  isDisplayDesktop(context) ? desktopDisplay1FontDelta : 0,
-            ),
+      child: InkWell(
+        focusColor: Colors.pink,
+        onTap: () {},
+        splashColor: Colors.transparent,
+        child: Text(
+          text,
+          style: Theme.of(context).textTheme.display1.apply(
+                color: color,
+                fontSizeDelta:
+                    isDisplayDesktop(context) ? desktopDisplay1FontDelta : 0,
+              ),
+        ),
       ),
     );
   }
@@ -315,30 +323,35 @@ class _DesktopCategoryItem extends StatelessWidget {
       color: colorScheme.surface,
       child: Semantics(
         container: true,
-        child: Column(
-          children: [
-            _DesktopCategoryHeader(
-              title: title,
-              imageString: imageString,
-            ),
-            Divider(
-              height: 2,
-              thickness: 2,
-              color: colorScheme.background,
-            ),
-            Flexible(
-              child: ListView(
-                children: [
-                  const SizedBox(height: 12),
-                  for (GalleryDemo demo in demos)
-                    CategoryDemoItem(
-                      demo: demo,
-                    ),
-                  SizedBox(height: 12),
-                ],
+        child: DefaultFocusTraversal(
+          policy: WidgetOrderFocusTraversalPolicy(),
+          child: Column(
+            children: [
+              _DesktopCategoryHeader(
+                title: title,
+                imageString: imageString,
               ),
-            ),
-          ],
+              Divider(
+                height: 2,
+                thickness: 2,
+                color: colorScheme.background,
+              ),
+              Flexible(
+                child: Focus(
+                  child: ListView(
+                    children: [
+                      const SizedBox(height: 12),
+                      for (GalleryDemo demo in demos)
+                        CategoryDemoItem(
+                          demo: demo,
+                        ),
+                      SizedBox(height: 12),
+                    ],
+                  ),
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );
@@ -358,34 +371,39 @@ class _DesktopCategoryHeader extends StatelessWidget {
     ColorScheme colorScheme = Theme.of(context).colorScheme;
     return Material(
       color: colorScheme.onBackground,
-      child: Row(
-        children: [
-          Padding(
-            padding: EdgeInsets.all(10),
-            child: Image.asset(
-              imageString,
-              width: 64,
-              height: 64,
-              excludeFromSemantics: true,
+      child: InkWell(
+        focusColor: Colors.pink,
+        splashColor: Colors.transparent,
+        onTap: () {},
+        child: Row(
+          children: [
+            Padding(
+              padding: EdgeInsets.all(10),
+              child: Image.asset(
+                imageString,
+                width: 64,
+                height: 64,
+                excludeFromSemantics: true,
+              ),
             ),
-          ),
-          Flexible(
-            child: Padding(
-              padding: EdgeInsetsDirectional.only(start: 8),
-              child: Semantics(
-                header: true,
-                child: Text(
-                  title,
-                  style: Theme.of(context).textTheme.headline.apply(
-                        color: colorScheme.onSurface,
-                      ),
-                  maxLines: 4,
-                  overflow: TextOverflow.ellipsis,
+            Flexible(
+              child: Padding(
+                padding: EdgeInsetsDirectional.only(start: 8),
+                child: Semantics(
+                  header: true,
+                  child: Text(
+                    title,
+                    style: Theme.of(context).textTheme.headline.apply(
+                          color: colorScheme.onSurface,
+                        ),
+                    maxLines: 4,
+                    overflow: TextOverflow.ellipsis,
+                  ),
                 ),
               ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
@@ -656,6 +674,7 @@ class _CarouselCard extends StatelessWidget {
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
         clipBehavior: Clip.antiAlias,
         child: InkWell(
+          focusColor: Colors.pink,
           onTap: () {
             Navigator.of(context).push<void>(
               MaterialPageRoute(
