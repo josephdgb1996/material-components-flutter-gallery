@@ -122,13 +122,16 @@ class _BackdropState extends State<Backdrop>
     final Animation<RelativeRect> animation = _getPanelAnimation(constraints);
 
     final Widget frontLayer = ExcludeSemantics(
-      child: InheritedBackdrop(
-        mobileController: _mobileController,
-        desktopController: _desktopController,
-        child: widget.frontLayer,
-        settingsButtonWidth: settingsButtonWidth,
-        desktopSettingsButtonHeight: desktopHeight,
-        mobileSettingsButtonHeight: mobileHeight,
+      child: DefaultFocusTraversal(
+        policy: WidgetOrderFocusTraversalPolicy(),
+        child: InheritedBackdrop(
+          mobileController: _mobileController,
+          desktopController: _desktopController,
+          child: widget.frontLayer,
+          settingsButtonWidth: settingsButtonWidth,
+          desktopSettingsButtonHeight: desktopHeight,
+          mobileSettingsButtonHeight: mobileHeight,
+        ),
       ),
       excluding: _isPanelVisible,
     );
