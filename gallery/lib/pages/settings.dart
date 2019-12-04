@@ -267,7 +267,6 @@ class _SettingsLink extends StatelessWidget {
 
     return InkWell(
       onTap: onTap,
-      focusColor: Colors.pink,
       child: Padding(
         padding: EdgeInsets.symmetric(
             horizontal: isDisplayDesktop(context) ? 16 : 32),

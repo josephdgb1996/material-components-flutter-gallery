@@ -386,39 +386,34 @@ class _DesktopCategoryHeader extends StatelessWidget {
     ColorScheme colorScheme = Theme.of(context).colorScheme;
     return Material(
       color: colorScheme.onBackground,
-      child: InkWell(
-        focusColor: Colors.pink,
-        splashColor: Colors.transparent,
-        onTap: () {},
-        child: Row(
-          children: [
-            Padding(
-              padding: EdgeInsets.all(10),
-              child: Image.asset(
-                imageString,
-                width: 64,
-                height: 64,
-                excludeFromSemantics: true,
-              ),
+      child: Row(
+        children: [
+          Padding(
+            padding: EdgeInsets.all(10),
+            child: Image.asset(
+              imageString,
+              width: 64,
+              height: 64,
+              excludeFromSemantics: true,
             ),
-            Flexible(
-              child: Padding(
-                padding: EdgeInsetsDirectional.only(start: 8),
-                child: Semantics(
-                  header: true,
-                  child: Text(
-                    title,
-                    style: Theme.of(context).textTheme.headline.apply(
-                          color: colorScheme.onSurface,
-                        ),
-                    maxLines: 4,
-                    overflow: TextOverflow.ellipsis,
-                  ),
+          ),
+          Flexible(
+            child: Padding(
+              padding: EdgeInsetsDirectional.only(start: 8),
+              child: Semantics(
+                header: true,
+                child: Text(
+                  title,
+                  style: Theme.of(context).textTheme.headline.apply(
+                        color: colorScheme.onSurface,
+                      ),
+                  maxLines: 4,
+                  overflow: TextOverflow.ellipsis,
                 ),
               ),
             ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }
@@ -692,7 +687,6 @@ class _CarouselCard extends StatelessWidget {
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
         clipBehavior: Clip.antiAlias,
         child: InkWell(
-          focusColor: Colors.pink,
           onTap: () {
             Navigator.of(context).push<void>(
               MaterialPageRoute(

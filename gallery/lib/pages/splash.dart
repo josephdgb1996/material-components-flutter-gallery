@@ -142,26 +142,23 @@ class _SplashBackLayer extends StatelessWidget {
     var effectAsset = 'assets/splash_effects/splash_effect_$effect.gif';
 
     return ExcludeSemantics(
-      child: Focus(
-        skipTraversal: true,
-        child: Container(
-          color: Color(0xFF030303), // This is the background color of the gifs.
-          child: Stack(
-            children: [
-              if (!isCollapsed)
-                Align(
-                  alignment: Alignment.center,
-                  child: Image.asset(effectAsset),
-                ),
+      child: Container(
+        color: Color(0xFF030303), // This is the background color of the gifs.
+        child: Stack(
+          children: [
+            if (!isCollapsed)
               Align(
-                alignment: isCollapsed ? Alignment.topCenter : Alignment.center,
-                child: Padding(
-                  padding: EdgeInsets.only(top: isCollapsed ? 50 : 0),
-                  child: Image.asset('assets/logo/flutter_logo.png'),
-                ),
+                alignment: Alignment.center,
+                child: Image.asset(effectAsset),
               ),
-            ],
-          ),
+            Align(
+              alignment: isCollapsed ? Alignment.topCenter : Alignment.center,
+              child: Padding(
+                padding: EdgeInsets.only(top: isCollapsed ? 50 : 0),
+                child: Image.asset('assets/logo/flutter_logo.png'),
+              ),
+            ),
+          ],
         ),
       ),
     );

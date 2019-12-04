@@ -254,7 +254,6 @@ class CategoryDemoItem extends StatelessWidget {
       color: Theme.of(context).colorScheme.surface,
       child: MergeSemantics(
         child: InkWell(
-          focusColor: Colors.pink,
           onTap: () {
             Navigator.push<void>(
               context,
