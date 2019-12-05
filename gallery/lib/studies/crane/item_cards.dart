@@ -15,6 +15,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:gallery/layout/adaptive.dart';
+import 'package:gallery/layout/highlight_focus.dart';
 import 'package:gallery/studies/crane/model/data.dart';
 import 'package:gallery/studies/crane/model/destination.dart';
 
@@ -41,10 +42,17 @@ class _ItemCardsState extends State<ItemCards> {
       if (listIndex == 2) ...eatDestinations,
     ];
 
+    debugDumpFocusTree();
+
     return destinations
         .map(
-          (d) => RepaintBoundary(
-            child: _DestinationCard(destination: d),
+          (d) => HighlightFocus(
+            debugLabel: 'DestinationCard: ${d.destination}',
+            highlightColor: Colors.red.withOpacity(0.5),
+            onPressed: () => print('pressed'),
+            child: RepaintBoundary(
+              child: _DestinationCard(destination: d),
+            ),
           ),
         )
         .toList();
@@ -56,6 +64,7 @@ class _ItemCardsState extends State<ItemCards> {
     // We use didChangeDependencies because the initialization involves an
     // InheritedWidget (for localization). However, we don't want destinations
     // to be shuffled when, say, resizing the window.
+    print('here $flyDestinations');
     if (flyDestinations == null) {
       flyDestinations = getFlyDestinations(context)..shuffle();
       sleepDestinations = getSleepDestinations(context)..shuffle();
@@ -65,6 +74,7 @@ class _ItemCardsState extends State<ItemCards> {
 
   @override
   Widget build(BuildContext context) {
+//    debugDumpFocusTree();
     final isDesktop = isDisplayDesktop(context);
     final List<Widget> destinationCards =
         _buildDestinationCards(listIndex: widget.index);
