@@ -36,11 +36,12 @@ master-branch-check: fetch-master
 
 .PHONY: deploy
 deploy: master-branch-check build-web
+	cp $(ROOT)/gallery/web/favicon.ico $(ROOT)/gallery/build/web/
 	firebase deploy
 
 .PHONY: gen-l10n
 gen-l10n:
-	$(DART) $(FLUTTER_DIR)/dev/tools/localization/gen_l10n.dart \
+	$(DART) $(FLUTTER_DIR)/dev/tools/localization/bin/gen_l10n.dart \
     --template-arb-file=intl_en_US.arb \
     --output-localization-file=gallery_localizations.dart \
     --output-class=GalleryLocalizations

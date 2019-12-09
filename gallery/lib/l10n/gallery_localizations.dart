@@ -2,7 +2,6 @@ import 'dart:async';
 
 import 'package:flutter/widgets.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
-import 'package:flutter_localized_countries/flutter_localized_countries.dart';
 import 'package:intl/intl.dart';
 
 import 'messages_all.dart';
@@ -87,7 +86,6 @@ class GalleryLocalizations {
   static const List<LocalizationsDelegate<dynamic>> localizationsDelegates =
       <LocalizationsDelegate<dynamic>>[
     delegate,
-    LocaleNamesLocalizationsDelegate(),
     GlobalMaterialLocalizations.delegate,
     GlobalCupertinoLocalizations.delegate,
     GlobalWidgetsLocalizations.delegate,
@@ -1681,6 +1679,22 @@ class GalleryLocalizations {
         locale: _localeName,
         name: 'demoOneLineListsTitle',
         desc: r'Title for lists demo with only one line of text per row.');
+  }
+
+  String get demoOptionsFeatureDescription {
+    return Intl.message(r'Tap here to view available options for this demo.',
+        locale: _localeName,
+        name: 'demoOptionsFeatureDescription',
+        desc:
+            r'Description for an alert that explains what the options button does.');
+  }
+
+  String get demoOptionsFeatureTitle {
+    return Intl.message(r'View options',
+        locale: _localeName,
+        name: 'demoOptionsFeatureTitle',
+        desc:
+            r'Title for an alert that explains what the options button does.');
   }
 
   String get demoOptionsTooltip {

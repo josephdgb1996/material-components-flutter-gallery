@@ -1,16 +1,6 @@
-// Copyright 2018-present the Flutter authors. All Rights Reserved.
-//
-// Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at
-//
-// http://www.apache.org/licenses/LICENSE-2.0
-//
-// Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and
-// limitations under the License.
+// Copyright 2019 The Flutter team. All rights reserved.
+// Use of this source code is governed by a BSD-style license that can be
+// found in the LICENSE file.
 
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
@@ -62,13 +52,12 @@ class _ItemCardsState extends State<ItemCards> {
   void didChangeDependencies() {
     super.didChangeDependencies();
     // We use didChangeDependencies because the initialization involves an
-    // InheritedWidget (for localization). However, we don't want destinations
-    // to be shuffled when, say, resizing the window.
-    print('here $flyDestinations');
+    // InheritedWidget (for localization). However, we don't need to get
+    // destinations again when, say, resizing the window.
     if (flyDestinations == null) {
-      flyDestinations = getFlyDestinations(context)..shuffle();
-      sleepDestinations = getSleepDestinations(context)..shuffle();
-      eatDestinations = getEatDestinations(context)..shuffle();
+      flyDestinations = getFlyDestinations(context);
+      sleepDestinations = getSleepDestinations(context);
+      eatDestinations = getEatDestinations(context);
     }
   }
 

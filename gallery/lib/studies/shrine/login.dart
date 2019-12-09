@@ -1,16 +1,6 @@
-// Copyright 2018-present the Flutter authors. All Rights Reserved.
-//
-// Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at
-//
-// http://www.apache.org/licenses/LICENSE-2.0
-//
-// Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and
-// limitations under the License.
+// Copyright 2019 The Flutter team. All rights reserved.
+// Use of this source code is governed by a BSD-style license that can be
+// found in the LICENSE file.
 
 import 'dart:math';
 
@@ -29,13 +19,6 @@ double desktopLoginScreenMainAreaWidth({BuildContext context}) {
     MediaQuery.of(context).size.width - 2 * _horizontalPadding,
   );
 }
-
-const _decoration = ShapeDecoration(
-  shape: BeveledRectangleBorder(
-    side: BorderSide(color: shrineBrown900, width: 0.5),
-    borderRadius: BorderRadius.all(Radius.circular(7)),
-  ),
-);
 
 class LoginPage extends StatefulWidget {
   @override
@@ -128,7 +111,6 @@ class _UsernameTextField extends StatelessWidget {
     return PrimaryColorOverride(
       color: shrineBrown900,
       child: Container(
-        decoration: _decoration,
         child: TextField(
           controller: _usernameController,
           cursorColor: colorScheme.onSurface,
@@ -154,7 +136,6 @@ class _PasswordTextField extends StatelessWidget {
     return PrimaryColorOverride(
       color: shrineBrown900,
       child: Container(
-        decoration: _decoration,
         child: TextField(
           controller: _passwordController,
           cursorColor: colorScheme.onSurface,

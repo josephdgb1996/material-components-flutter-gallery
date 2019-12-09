@@ -13,6 +13,7 @@ import 'package:gallery/data/demos.dart';
 import 'package:gallery/data/gallery_options.dart';
 import 'package:gallery/l10n/gallery_localizations.dart';
 import 'package:gallery/layout/adaptive.dart';
+import 'package:gallery/pages/backdrop.dart';
 import 'package:gallery/pages/category_list_item.dart';
 import 'package:gallery/pages/settings.dart';
 import 'package:gallery/pages/splash.dart';
@@ -116,6 +117,21 @@ class HomePage extends StatelessWidget {
           ),
           children: [
             ExcludeSemantics(child: _GalleryHeader()),
+
+            /// TODO: When Focus widget becomes better remove dummy Focus
+            /// variable.
+
+            /// This [Focus] widget grabs focus from the settingsIcon,
+            /// when settings isn't open.
+            /// The container following the Focus widget isn't wrapped with
+            /// Focus because anytime FocusScope.of(context).requestFocus() the
+            /// focused widget will be skipped. We want to be able to focus on
+            /// the container which is why we created this Focus variable.
+            Focus(
+              focusNode:
+                  InheritedBackdropFocusNodes.of(context).backLayerFocusNode,
+              child: SizedBox(),
+            ),
             Container(
               height: carouselHeight,
               child: Row(
@@ -264,11 +280,10 @@ class _AnimatedHomePageState extends State<_AnimatedHomePage>
       // splash page animation is finished on initState.
       _animationController.value = 1.0;
     } else {
-      // Wait for the splash page animation to be finished before
-      // starting ours.
+      // Start our animation halfway through the splash page animation.
       _launchTimer = Timer(
         const Duration(
-          milliseconds: splashPageAnimationDurationInMilliseconds,
+          milliseconds: splashPageAnimationDurationInMilliseconds ~/ 2,
         ),
         () {
           _animationController.forward();
@@ -390,20 +405,18 @@ class _DesktopCategoryItem extends StatelessWidget {
               ),
               Flexible(
                 // Remove ListView top padding as it is already accounted for.
-                child: Focus(
-                  child: MediaQuery.removePadding(
-                    removeTop: true,
-                    context: context,
-                    child: ListView(
-                      children: [
-                        const SizedBox(height: 12),
-                        for (GalleryDemo demo in demos)
-                          CategoryDemoItem(
-                            demo: demo,
-                          ),
-                        SizedBox(height: 12),
-                      ],
-                    ),
+                child: MediaQuery.removePadding(
+                  removeTop: true,
+                  context: context,
+                  child: ListView(
+                    children: [
+                      const SizedBox(height: 12),
+                      for (GalleryDemo demo in demos)
+                        CategoryDemoItem(
+                          demo: demo,
+                        ),
+                      SizedBox(height: 12),
+                    ],
                   ),
                 ),
               ),
@@ -832,13 +845,13 @@ class _StudyWrapperState extends State<_StudyWrapper> {
           child: Stack(
             children: [
               Semantics(
-                sortKey: OrdinalSortKey(1),
+                sortKey: const OrdinalSortKey(1),
                 child: widget.study,
               ),
-              Semantics(
-                sortKey: OrdinalSortKey(0),
-                child: Align(
-                  alignment: AlignmentDirectional.bottomStart,
+              Align(
+                alignment: AlignmentDirectional.bottomStart,
+                child: Semantics(
+                  sortKey: const OrdinalSortKey(0),
                   child: Padding(
                     padding: const EdgeInsets.all(16),
                     child: FloatingActionButton.extended(
